@@ -37,6 +37,7 @@
         nav a:hover {
             background-color: #20603d; /* Dark green */
             color: white;
+            border-radius: 10px; /* 边角圆润化 */
         }
         main {
             padding: 20px;
@@ -132,6 +133,7 @@
         }
         nav a:active {
             transform: scale(0.95);
+            border-radius: 10px; /* 边角圆润化 */
         }
         .social-icons {
             position: absolute;
@@ -144,6 +146,57 @@
         .social-icons a img {
             width: 30px;
             height: 30px;
+        }
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 10px;
+        }
+        .menu-toggle span {
+            height: 3px;
+            width: 25px;
+            background: #20603d;
+            margin: 4px 0;
+            transition: 0.4s;
+        }
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+            nav {
+                flex-direction: column;
+                display: none;
+            }
+            nav.active {
+                display: flex;
+            }
+            nav a {
+                padding: 10px;
+                margin: 5px 0; /* 增加间距 */
+            }
+            .section {
+                padding: 15px;
+            }
+            .hero {
+                padding: 50px 10px;
+            }
+            .hero h2 {
+                font-size: 36px;
+            }
+            .hero p {
+                font-size: 18px;
+            }
+            .social-icons {
+                top: 10px;
+                right: 10px;
+            }
+            .footer-content {
+                flex-direction: column;
+            }
+            .footer-content div {
+                margin: 5px 0;
+            }
         }
     </style>
 </head>
@@ -167,6 +220,11 @@
             <a href="https://www.tiktok.com/@tg.auto.rwanda" target="_blank">
                 <img src="TikTok.jpg" alt="TikTok">
             </a>
+        </div>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
     </header>
     <nav>
@@ -218,5 +276,11 @@
         </div>
         <p class="footer-left">Copyright &copy; 2024 Triple Goats Portal</p>
     </footer>
+    <script>
+        function toggleMenu() {
+            const nav = document.querySelector('nav');
+            nav.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
