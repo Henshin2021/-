@@ -3,40 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vehicle Models - Triple Goats Portal</title>
+    <title>About Us - Triple Goats Portal</title>
     <style>
         body {
-            writing-mode: horizontal-tb;
+            writing-mode: horizontal-tb; /* 确保文字水平显示 */
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
-            scroll-behavior: smooth;
         }
         header {
-            background-color: #20603d;
+            background-color: #20603d; /* Dark green */
             color: white;
-            padding: 10px;
+            padding: 10px; /* 增加顶部菜单栏的长度 */
             text-align: center;
-            position: relative;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果 */
         }
         nav {
             display: flex;
             justify-content: center;
-            background-color: #fad201;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fad201; /* Yellow */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果 */
         }
         nav a {
-            color: #20603d;
-            padding: 15px 20px;
+            color: #20603d; /* Dark green */
+            padding: 15px 20px; /* 增加顶部菜单栏的比例 */
             text-decoration: none;
             text-align: center;
-            transition: background-color 0.3s, color 0.3s;
-            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s; /* 过渡效果 */
         }
         nav a:hover {
-            background-color: #20603d;
+            background-color: #20603d; /* Dark green */
             color: white;
         }
         nav a:active {
@@ -48,30 +46,24 @@
         }
         .section {
             margin: 20px 0;
-            background-color: #ffffff;
-            padding: 20px 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff; /* 白色背景 */
+            padding: 20px 30px; /* 增加内边距 */
+            border-radius: 10px; /* 圆角 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果 */
             position: relative;
             z-index: 1;
         }
         .section h3 {
             margin-top: 0;
-            color: #20603d;
-        }
-        .section img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            margin-bottom: 10px;
+            color: #20603d; /* Dark green */
         }
         footer {
-            background-color: #20603d;
+            background-color: #20603d; /* Dark green */
             color: white;
             text-align: center;
             padding: 20px;
             position: relative;
-            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果 */
         }
         .contact-info {
             display: flex;
@@ -90,7 +82,6 @@
             bottom: 5px;
             left: 5px;
             font-size: 10px;
-            color: white;
         }
         .footer-content {
             display: flex;
@@ -102,60 +93,44 @@
         }
         .logo {
             position: absolute;
-            top: 30px;
-            left: 50px;
+            top: 30px; /* 往右下偏移 */
+            left: 50px; /* 往右下偏移 */
             display: flex;
             align-items: center;
-            text-decoration: none;
+            text-decoration: none; /* 取消下划线 */
             background-color: transparent; /* 背景色改为透明 */
         }
         .logo img {
-            width: 40px;
-            height: 40px;
+            width: 40px; /* 调整顶部菜单栏的比例 */
+            height: 40px; /* 调整顶部菜单栏的比例 */
             margin-right: 10px;
         }
         .logo h1 {
-            font-size: 24px;
+            font-size: 24px; /* 增加字体大小 */
             color: white;
         }
         .logo:active h1 {
             transform: scale(0.95);
         }
         .hero {
-            background-image: url('hero-image.jpg');
+            background-image: url('hero-image.jpg'); /* 添加背景图片 */
             background-size: cover;
             background-position: center;
             padding: 100px 20px;
             text-align: center;
             color: white;
-            box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.3);
+            box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.3); /* 内部阴影效果 */
         }
         .hero h2 {
-            font-size: 48px;
+            font-size: 48px; /* 增加字体大小 */
             margin: 0;
         }
         .hero p {
-            font-size: 24px;
+            font-size: 24px; /* 增加字体大小 */
             margin: 10px 0 0;
         }
         .smooth-scroll {
             scroll-behavior: smooth;
-        }
-        .model-link {
-            display: block;
-            margin: 20px 0;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            text-decoration: none;
-            color: #20603d;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        .model-link:hover {
-            background-color: #20603d;
-            color: white;
         }
         .social-icons {
             position: absolute;
@@ -173,11 +148,11 @@
 </head>
 <body>
     <header>
-        <a href="C:/Users/HP/Desktop/网页/home.html" class="logo">
+        <a href="home.html" class="logo">
             <img src="companylogo.jpg" alt="Company Logo">
             <h1>Triple Goats</h1>
         </a>
-        <h1>Vehicle Models</h1>
+        <h1>About Us</h1>
         <div class="social-icons">
             <a href="https://www.instagram.com/tg_auto_rwanda/" target="_blank">
                 <img src="ins.jpg" alt="Instagram">
@@ -194,6 +169,8 @@
         </div>
     </header>
     <nav>
+        <!-- 去掉home功能键 -->
+        <!-- <a href="home.html">Home</a> -->
         <a href="inventory.html" class="smooth-scroll">Inventory</a>
         <a href="services.html" class="smooth-scroll">Services</a>
         <a href="financing.html" class="smooth-scroll">Financing</a>
@@ -202,17 +179,27 @@
         <a href="contact.html" class="smooth-scroll">Contact Us</a>
     </nav>
     <div class="hero">
-        <h2>Our Trucks</h2>
-        <p>Check out our range of trucks for various transportation needs.</p>
+        <h2>About Triple Goats</h2>
+        <p>Learn more about our company and values</p>
     </div>
     <main>
-        <h2>Vehicle Models</h2>
-        <a href="车型/vans.html" class="model-link">Vans</a>
-        <a href="车型/trucks.html" class="model-link">Trucks</a>
-        <a href="车型/suv.html" class="model-link">SUVs</a>
-        <a href="车型/refrigerated.html" class="model-link">Refrigerated Trucks</a>
-        <a href="车型/pickup.html" class="model-link">Pickup Trucks</a>
-        <a href="车型/buses.html" class="model-link">Buses</a>
+        <h2>About Triple Goats</h2>
+        <div class="section">
+            <h3>Our Mission</h3>
+            <p>Triple Goats is a leading car dealership offering a wide range of new and used cars. Our mission is to provide excellent customer service and help you find the perfect car.</p>
+        </div>
+        <div class="section">
+            <h3>Our Values</h3>
+            <p>We believe in integrity, transparency, and putting our customers first. Our team is dedicated to making your car buying experience as smooth and enjoyable as possible.</p>
+        </div>
+        <div class="section">
+            <h3>Our History</h3>
+            <p>Founded in 2024, Triple Goats has grown to become one of the most trusted car dealerships in the region.</p>
+        </div>
+        <div class="section">
+            <h3>Community Involvement</h3>
+            <p>We are committed to giving back to the community through various initiatives and partnerships.</p>
+        </div>
     </main>
     <footer>
         <div class="footer-content">
@@ -225,7 +212,7 @@
                 <p><a href="https://www.google.com/maps/place/KK+15+Rd,+%E5%8D%A2%E6%97%BA%E8%BE%BE/@-2.0434017,30.0935735,220m/data=!3m1!1e3!4m6!3m5!1s0x19dca6262f5e285b:0x29563196d611ebf4!8m2!3d-2.0432723!4d30.0941671!16s%2Fg%2F12vtxklhg?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" style="text-decoration: none; color: white;">KK 15 Rd, Kicukiro, Kigali</a></p>
             </div>
         </div>
-        <p class="footer-left" style="color: white;">Copyright &copy; 2024 Triple Goats Portal</p>
+        <p class="footer-left">Copyright &copy; 2025 Triple Goats Portal</p>
     </footer>
 </body>
 </html>
