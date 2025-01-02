@@ -96,7 +96,7 @@
         .logo {
             position: absolute;
             top: 30px; /* 往右下偏移 */
-            left: 50px; /* 往右下偏移 */
+            left: 100px; /* 往右下偏移 */
             display: flex;
             align-items: center;
             text-decoration: none; /* 取消下划线 */
@@ -250,16 +250,55 @@
                 margin: 5px 0;
             }
         }
+        .fade-in {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+        }
+        .highlight {
+            background-color: #ffffff; /* 改回白色背景 */
+            transition: background-color 0.3s ease-in-out;
+        }
+        .highlight:hover {
+            background-color: #20603d;
+            color: white;
+        }
+        @keyframes text-fade-in {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .dynamic-text {
+            animation: text-fade-in 2s ease-in-out;
+        }
+        .login-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-left: 20px;
+            background-color: #20603d; /* Dark green */
+            color: white;
+            text-decoration: none;
+            border-radius: 20px; /* 椭圆形 */
+            transition: background-color 0.3s, color 0.3s; /* 过渡效果 */
+        }
+        .login-button:hover {
+            background-color: #fad201; /* Yellow */
+            color: #20603d; /* Dark green */
+        }
+        .login-button:active {
+            transform: scale(0.95);
+        }
     </style>
 </head>
 <body>
     <header>
-        <a href="home.html" class="logo">
+        <a href="home.html" class="logo" style="left: 100px;">
             <img src="companylogo.jpg" alt="Company Logo">
             <h1>Triple Goats</h1>
         </a>
         <h1>Welcome to Triple Goats</h1>
-        <div class="social-icons">
+        <div class="social-icons" style="right: 60px;">
             <a href="https://www.instagram.com/tg_auto_rwanda/" target="_blank">
                 <img src="ins.jpg" alt="Instagram">
             </a>
@@ -272,6 +311,7 @@
             <a href="https://www.tiktok.com/@tg.auto.rwanda" target="_blank">
                 <img src="TikTok.jpg" alt="TikTok">
             </a>
+            <a href="login.html" class="login-button" style="margin-left: 20px;">Login</a>
         </div>
         <div class="menu-toggle" onclick="toggleMenu()">
             <span></span>
@@ -302,28 +342,28 @@
             <a href="buses.html">Buses</a>
             <a href="vans.html">Vans</a>
         </div>
-        <h2>Welcome to Triple Goats</h2>
-        <p>Your trusted car dealership</p>
+        <h2 class="dynamic-text">Welcome to Triple Goats</h2>
+        <p class="dynamic-text">Your trusted car dealership</p>
     </div>
     <main>
         <h2>Home</h2>
-        <div class="section">
+        <div class="section fade-in highlight">
             <h3>About Us</h3>
             <p>Triple Goats is a leading car dealership offering a wide range of new and used cars. Our mission is to provide excellent customer service and help you find the perfect car.</p>
         </div>
-        <div class="section">
+        <div class="section fade-in highlight">
             <h3>Our Services</h3>
             <p>We offer car sales, financing options, and maintenance services to ensure your car stays in top condition.</p>
         </div>
-        <div class="section">
+        <div class="section fade-in highlight">
             <h3>Contact Us</h3>
             <p>Have any questions? Feel free to reach out to us at +250 785 084 313 / +250 794 104 908 or visit us at KK 15 Rd, Kicukiro, Kigali.</p>
         </div>
-        <div class="section">
+        <div class="section fade-in highlight">
             <h3>Our Team</h3>
             <p>Meet our dedicated team of professionals who are here to assist you with all your car buying needs.</p>
         </div>
-        <div class="section">
+        <div class="section fade-in highlight">
             <h3>Customer Reviews</h3>
             <p>Read what our satisfied customers have to say about their experience with Triple Goats.</p>
         </div>
@@ -346,6 +386,21 @@
             const nav = document.querySelector('nav');
             nav.classList.toggle('active');
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
     </script>
 </body>
 </html>

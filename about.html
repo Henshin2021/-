@@ -96,7 +96,7 @@
         .logo {
             position: absolute;
             top: 30px; /* 往右下偏移 */
-            left: 50px; /* 往右下偏移 */
+            left: 100px; /* 往右下偏移 */
             display: flex;
             align-items: center;
             text-decoration: none; /* 取消下划线 */
@@ -200,16 +200,57 @@
                 margin: 5px 0;
             }
         }
+        .fade-in {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+        }
+        .highlight {
+            background-color: #ffffff; /* 改回白色背景 */
+            transition: background-color 0.3s ease-in-out;
+        }
+        .highlight:hover {
+            background-color: #20603d;
+            color: white;
+        }
+        @keyframes text-fade-in {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .dynamic-text {
+            animation: text-fade-in 2s ease-in-out;
+        }
+        .login-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            background-color: #20603d;
+            color: white;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-left: 20px;
+        }
+        .login-button:hover {
+            background-color: #fad201;
+            color: #20603d;
+        }
+        .login-button:active {
+            transform: scale(0.95);
+        }
     </style>
 </head>
 <body>
     <header>
-        <a href="home.html" class="logo">
+        <a href="home.html" class="logo" style="left: 100px;">
             <img src="companylogo.jpg" alt="Company Logo">
             <h1>Triple Goats</h1>
         </a>
         <h1>About Us</h1>
-        <div class="social-icons">
+        <div class="social-icons" style="right: 60px;">
             <a href="https://www.instagram.com/tg_auto_rwanda/" target="_blank">
                 <img src="ins.jpg" alt="Instagram">
             </a>
@@ -222,6 +263,7 @@
             <a href="https://www.tiktok.com/@tg.auto.rwanda" target="_blank">
                 <img src="TikTok.jpg" alt="TikTok">
             </a>
+            <a href="login.html" class="login-button" style="margin-left: 20px;">Login</a>
         </div>
         <div class="menu-toggle" onclick="toggleMenu()">
             <span></span>
@@ -240,24 +282,24 @@
         <a href="contact.html" class="smooth-scroll">Contact Us</a>
     </nav>
     <div class="hero">
-        <h2>About Triple Goats</h2>
-        <p>Learn more about our company and values</p>
+        <h2 class="dynamic-text">About Triple Goats</h2>
+        <p class="dynamic-text">Learn more about our company and values</p>
     </div>
     <main>
         <h2>About Triple Goats</h2>
-        <div class="section">
+        <div class="section fade-in highlight">
             <h3>Our Mission</h3>
             <p>Triple Goats is a leading car dealership offering a wide range of new and used cars. Our mission is to provide excellent customer service and help you find the perfect car.</p>
         </div>
-        <div class="section">
+        <div class="section fade-in highlight">
             <h3>Our Values</h3>
             <p>We believe in integrity, transparency, and putting our customers first. Our team is dedicated to making your car buying experience as smooth and enjoyable as possible.</p>
         </div>
-        <div class="section">
+        <div class="section fade-in highlight">
             <h3>Our History</h3>
             <p>Founded in 2024, Triple Goats has grown to become one of the most trusted car dealerships in the region.</p>
         </div>
-        <div class="section">
+        <div class="section fade-in highlight">
             <h3>Community Involvement</h3>
             <p>We are committed to giving back to the community through various initiatives and partnerships.</p>
         </div>
@@ -280,6 +322,21 @@
             const nav = document.querySelector('nav');
             nav.classList.toggle('active');
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
     </script>
 </body>
 </html>

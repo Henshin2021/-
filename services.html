@@ -97,7 +97,7 @@
         .logo {
             position: absolute;
             top: 30px; /* 往右下偏移 */
-            left: 50px; /* 往右下偏移 */
+            left: 100px; /* 往右下偏移 */
             display: flex;
             align-items: center;
             text-decoration: none; /* 取消下划线 */
@@ -201,21 +201,55 @@
                 margin: 5px 0;
             }
         }
+        .fade-in {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+        }
+        .highlight {
+            background-color: #ffffff; /* 改回白色背景 */
+            transition: background-color 0.3s ease-in-out;
+        }
+        .highlight:hover {
+            background-color: #20603d;
+            color: white;
+        }
+        @keyframes text-fade-in {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .dynamic-text {
+            animation: text-fade-in 2s ease-in-out;
+        }
+        .login-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-left: 20px;
+            background-color: #20603d; /* Dark green */
+            color: white;
+            text-decoration: none;
+            border-radius: 20px; /* 椭圆形 */
+            transition: background-color 0.3s, color 0.3s; /* 过渡效果 */
+        }
+        .login-button:hover {
+            background-color: #fad201; /* Yellow */
+            color: #20603d; /* Dark green */
+        }
+        .login-button:active {
+            transform: scale(0.95);
+        }
     </style>
 </head>
 <body>
     <header>
-        <a href="home.html" class="logo">
+        <a href="home.html" class="logo" style="left: 100px;">
             <img src="companylogo.jpg" alt="Company Logo">
             <h1>Triple Goats</h1>
         </a>
         <h1>Services</h1>
-        <div class="menu-toggle" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <div class="social-icons">
+        <div class="social-icons" style="right: 60px;">
             <a href="https://www.instagram.com/tg_auto_rwanda/" target="_blank">
                 <img src="ins.jpg" alt="Instagram">
             </a>
@@ -228,6 +262,12 @@
             <a href="https://www.tiktok.com/@tg.auto.rwanda" target="_blank">
                 <img src="TikTok.jpg" alt="TikTok">
             </a>
+            <a href="login.html" class="login-button" style="margin-left: 20px;">Login</a>
+        </div>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
     </header>
     <nav>
@@ -241,28 +281,28 @@
         <a href="contact.html" class="smooth-scroll">Contact Us</a>
     </nav>
     <div class="hero">
-        <h2>Our Services</h2>
-        <p>Discover the range of services we offer</p>
+        <h2 class="dynamic-text">Our Services</h2>
+        <p class="dynamic-text">Discover the range of services we offer</p>
     </div>
     <main>
         <h2>Our Services</h2>
-        <div class="section">
+        <div class="section fade-in highlight">
             <h3>Car Sales</h3>
             <p>We offer a wide range of new and used cars to suit your needs and budget.</p>
         </div>
-        <div class="section">
+        <div class="section fade-in highlight">
             <h3>Financing</h3>
             <p>Our financing options make it easy for you to get the car you want at a price you can afford.</p>
         </div>
-        <div class="section">
+        <div class="section fade-in highlight">
             <h3>Maintenance</h3>
             <p>Our experienced technicians provide top-notch maintenance and repair services to keep your car running smoothly.</p>
         </div>
-        <div class="section">
+        <div class="section fade-in highlight">
             <h3>Insurance</h3>
             <p>We offer comprehensive insurance plans to protect your investment and give you peace of mind.</p>
         </div>
-        <div class="section">
+        <div class="section fade-in highlight">
             <h3>Trade-In</h3>
             <p>Trade in your old car for a new one with our hassle-free trade-in process.</p>
         </div>
@@ -285,6 +325,21 @@
             const nav = document.querySelector('nav');
             nav.classList.toggle('active');
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
     </script>
 </body>
 </html>

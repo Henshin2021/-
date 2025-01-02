@@ -152,6 +152,23 @@
             width: 30px;
             height: 30px;
         }
+        .login-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-left: 20px;
+            background-color: #20603d; /* Dark green */
+            color: white;
+            text-decoration: none;
+            border-radius: 20px; /* 椭圆形 */
+            transition: background-color 0.3s, color 0.3s; /* 过渡效果 */
+        }
+        .login-button:hover {
+            background-color: #fad201; /* Yellow */
+            color: #20603d; /* Dark green */
+        }
+        .login-button:active {
+            transform: scale(0.95);
+        }
     </style>
 </head>
 <body>
@@ -174,6 +191,7 @@
             <a href="https://www.tiktok.com/@tg.auto.rwanda" target="_blank">
                 <img src="TikTok.jpg" alt="TikTok">
             </a>
+            <a href="login.html" class="login-button" style="margin-left: 20px;">Login</a>
         </div>
     </header>
     <nav>

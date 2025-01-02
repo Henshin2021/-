@@ -104,7 +104,7 @@
         .logo {
             position: absolute;
             top: 30px;
-            left: 50px;
+            left: 100px;
             display: flex;
             align-items: center;
             text-decoration: none;
@@ -173,6 +173,23 @@
         .social-icons a:active img {
             transform: scale(0.95);
         }
+        .login-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-left: 20px;
+            background-color: #20603d; /* Dark green */
+            color: white;
+            text-decoration: none;
+            border-radius: 20px; /* 椭圆形 */
+            transition: background-color 0.3s, color 0.3s; /* 过渡效果 */
+        }
+        .login-button:hover {
+            background-color: #fad201; /* Yellow */
+            color: #20603d; /* Dark green */
+        }
+        .login-button:active {
+            transform: scale(0.95);
+        }
         .menu-toggle {
             display: none;
             flex-direction: column;
@@ -185,6 +202,28 @@
             background: #20603d;
             margin: 4px 0;
             transition: 0.4s;
+        }
+        .fade-in {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+        }
+        .highlight {
+            background-color: #ffffff; /* 改回白色背景 */
+            transition: background-color 0.3s ease-in-out;
+        }
+        .highlight:hover {
+            background-color: #20603d;
+            color: white;
+        }
+        @keyframes text-fade-in {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .dynamic-text {
+            animation: text-fade-in 2s ease-in-out;
         }
         @media (max-width: 768px) {
             .menu-toggle {
@@ -228,12 +267,12 @@
 </head>
 <body>
     <header>
-        <a href="home.html" class="logo">
+        <a href="home.html" class="logo" style="left: 100px;">
             <img src="companylogo.jpg" alt="Company Logo">
             <h1>Triple Goats</h1>
         </a>
         <h1>Vehicle Models</h1>
-        <div class="social-icons">
+        <div class="social-icons" style="right: 60px;">
             <a href="https://www.instagram.com/tg_auto_rwanda/" target="_blank">
                 <img src="ins.jpg" alt="Instagram">
             </a>
@@ -246,6 +285,7 @@
             <a href="https://www.tiktok.com/@tg.auto.rwanda" target="_blank">
                 <img src="TikTok.jpg" alt="TikTok">
             </a>
+            <a href="login.html" class="login-button" style="margin-left: 20px;">Login</a>
         </div>
         <div class="menu-toggle" onclick="toggleMenu()">
             <span></span>
@@ -262,17 +302,17 @@
         <a href="contact.html" class="smooth-scroll">Contact Us</a>
     </nav>
     <div class="hero">
-        <h2>Our Trucks</h2>
-        <p>Check out our range of trucks for various transportation needs.</p>
+        <h2 class="dynamic-text">Our Trucks</h2>
+        <p class="dynamic-text">Check out our range of trucks for various transportation needs.</p>
     </div>
     <main>
         <h2>Vehicle Models</h2>
-        <a href="vans.html" class="model-link">Vans</a>
-        <a href="trucks.html" class="model-link">Trucks</a>
-        <a href="suv.html" class="model-link">SUVs</a>
-        <a href="refrigerated.html" class="model-link">Refrigerated Trucks</a>
-        <a href="pickup.html" class="model-link">Pickup Trucks</a>
-        <a href="buses.html" class="model-link">Buses</a>
+        <a href="vans.html" class="model-link fade-in highlight">Vans</a>
+        <a href="trucks.html" class="model-link fade-in highlight">Trucks</a>
+        <a href="suv.html" class="model-link fade-in highlight">SUVs</a>
+        <a href="refrigerated.html" class="model-link fade-in highlight">Refrigerated Trucks</a>
+        <a href="pickup.html" class="model-link fade-in highlight">Pickup Trucks</a>
+        <a href="buses.html" class="model-link fade-in highlight">Buses</a>
     </main>
     <footer>
         <div class="footer-content">
@@ -292,6 +332,21 @@
             const nav = document.querySelector('nav');
             nav.classList.toggle('active');
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
     </script>
 </body>
 </html>
