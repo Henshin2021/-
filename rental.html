@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rental - Triple Goats</title>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" as="style" onload="this.rel='stylesheet'">
+    <link rel="preload" href="companylogo.jpg" as="image">
+    <style>
+        :root {
+            --primary-color: #001f3f;
+            --secondary-color: #ffffff;
+            --accent-color: #0074D9;
+            --dark-color: #000000;
+            --text-color: #ffffff;
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--primary-color);
+            color: var(--secondary-color);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--accent-color);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            transition: transform 0.3s;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+        }
+
+        header {
+            background: var(--primary-color);
+            color: var(--secondary-color);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s, filter 0.3s;
+        }
+
+        .logo img {
+            width: 80px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 36px;
+            margin: 0 0 3px 0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo .slogan {
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: var(--secondary-color);
+            user-select: none;
+            margin-top: 0;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            margin: 4px 0;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+            background-color: var(--secondary-color);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+            background-color: var(--secondary-color);
+        }
+
+        nav {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-grow: 1;
+        }
+
+        nav a {
+            color: var(--secondary-color);
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        nav a:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown .dropbtn {
+            color: var(--secondary-color);
+            padding: 8px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .dropdown:hover .dropbtn {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            width: 200px;
+            text-align: center;
+            border-radius: 5px;
+            top: 100%;
+            left: 0;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        /* Mobile and Desktop Font Color */
+        /* Mobile */
+        @media (max-width: 768px) {
+            .dropdown-content a {
+                color: #fff; /* Mobile white font */
+            }
+        }
+
+        /* Desktop */
+        @media (min-width: 769px) {
+            .dropdown-content a {
+                color: #333; /* Desktop black font */
+            }
+        }
+
+        .social-item img {
+            width: 30px;
+            height: 30px;
+            object-fit: cover;
+            transition: transform 0.3s, filter 0.3s;
+        }
+
+        .social-item img:hover {
+            transform: scale(1.1) rotate(20deg);
+            filter: brightness(1.2);
+        }
+
+        .social-item img:active {
+            transform: scale(0.9) rotate(-15deg);
+        }
+
+        .top-social-media,
+        .bottom-social-media {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px 0;
+        }
+
+        .bottom-social-media {
+            background: var(--primary-color);
+        }
+
+        .hero {
+            position: relative;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--secondary-color);
+            text-align: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero:after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+            z-index: 1;
+        }
+
+        .hero h1 {
+            z-index: 2;
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            z-index: 2;
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        .vehicle-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            padding: 0 10px;
+            background: var(--primary-color);
+            margin-left: 20px;
+        }
+
+        .table-section {
+            display: flex;
+            justify-content: center;
+            margin: 50px 0;
+        }
+
+        .table-container {
+            max-width: 800px;
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        thead {
+            background-color: #0074D9;
+            color: var(--secondary-color);
+        }
+
+        th,
+        td {
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #dddddd;
+            background-color: #1a73e8;
+        }
+
+        th {
+            font-weight: bold;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+
+        .form-section {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+        }
+
+        .form-container {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container iframe {
+            width: 100%;
+            height: 80vh;
+            min-height: 400px;
+            border: none;
+            background: var(--secondary-color);
+        }
+
+        .contact-info {
+            text-align: center;
+            margin: 20px auto;
+            max-width: 600px;
+            padding: 20px;
+        }
+
+        .contact-info h3 {
+            font-size: 24px;
+            margin: 20px 0;
+            color: var(--secondary-color);
+        }
+
+        .contact-info p {
+            font-size: 16px;
+            margin: 10px 0;
+            color: var(--secondary-color);
+        }
+
+        .contact-info .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        .contact-info .btn:hover {
+            background: #0055aa;
+        }
+
+        .whatsapp-link {
+            color: var(--secondary-color); /* 白色 */
+            text-decoration: none; /* 去掉下划线 */
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav {
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(0, 0, 0, 0.8);
+                display: none;
+                transition: all 0.3s ease;
+                z-index: 1001;
+            }
+
+            nav.active {
+                top: 112px;
+                display: flex;
+            }
+
+            nav a {
+                padding: 15px;
+                text-align: center;
+            }
+
+            .dropdown-content {
+                position: static;
+                background-color: rgba(0, 0, 0, 0.5);
+                box-shadow: none;
+                width: 100%;
+                text-align: center;
+            }
+
+            .dropdown-content a {
+                padding: 15px;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .dropdown-content a:last-child {
+                border-bottom: none;
+            }
+
+            .dropdown-content {
+                display: none;
+            }
+
+            .dropdown.active .dropdown-content {
+                display: block;
+            }
+
+            .dropdown .dropbtn {
+                margin-left: -15px;
+                width: 100%;
+            }
+
+            .top-social-media {
+                display: none;
+            }
+
+            main {
+                padding: 20px 10px;
+            }
+
+            .contact-info {
+                padding: 10px;
+            }
+
+            .contact-info h3 {
+                font-size: 20px;
+            }
+
+            .contact-info p {
+                font-size: 14px;
+            }
+
+            .contact-info .btn {
+                font-size: 14px;
+                padding: 10px 15px;
+                margin-top: 10px;
+            }
+
+            .table-container {
+                overflow-x: auto;
+            }
+
+            table td,
+            table th {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .form-container iframe {
+                height: 600px;
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background: var(--primary-color);
+            color: var(--secondary-color);
+        }
+
+        /* 确保 Rental Services 文字居中 */
+        main#vehicles {
+            text-align: center;
+        }
+
+        main#vehicles h2 {
+            text-align: center;
+            font-size: 36px;
+            padding: 20px;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="home.html" class="logo">
+            <img src="companylogo.jpg" alt="Triple Goats Logo" loading="lazy">
+            <div class="logo-text">
+                <h1>Triple Goats</h1>
+                <p class="slogan">GREEN ENERGY GREEN LIFE</p>
+            </div>
+        </a>
+        <nav id="nav-menu">
+            <a href="inventory.html">INVENTORY</a>
+            <a href="charging.html">CHARGING</a>
+            <a href="services.html" class="active">SERVICES</a>
+            <div class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">DISCOVER</a>
+                <div class="dropdown-content">
+                    <a href="testdrive.html">TEST DRIVE</a>
+                    <a href="about.html">ABOUT</a>
+                    <a href="contact.html">CONTACT</a>
+                </div>
+            </div>
+        </nav>
+        <div class="top-social-media">
+            <a href="https://www.instagram.com/tg_auto_rwanda/" class="social-item"><img src="ins.jpg" alt="Instagram" loading="lazy"></a>
+            <a href="https://x.com/Triple_Goats" class="social-item"><img src="X.jpg" alt="Twitter" loading="lazy"></a>
+            <a href="https://www.facebook.com/TripleGoats" class="social-item"><img src="facebook.jpg" alt="Facebook" loading="lazy"></a>
+            <a href="https://www.tiktok.com/@tg.auto.rwanda" class="social-item"><img src="tiktok.jpg" alt="TikTok" loading="lazy"></a>
+        </div>
+        <div class="menu-toggle" id="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <main id="vehicles">
+        <h2>Rental Services</h2>
+        <div class="vehicle-section">
+            <!-- Vehicle Content -->
+        </div>
+    </main>
+
+    <div class="table-section">
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Vehicle Type</th>
+                        <th>Price</th>
+                        <th>Availability</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>BYD SONG PLUS</td>
+                        <td>$100/day</td>
+                        <td>Available</td>
+                    </tr>
+                    <tr>
+                        <td>VOLKSWAGEN ID.4</td>
+                        <td>$100/day</td>
+                        <td>Available</td>
+                    </tr>
+                    <tr>
+                        <td>KIA EV5</td>
+                        <td>$100/day</td>
+                        <td>Available</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="form-section">
+        <div class="form-container">
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd4l0AMRdl9shJnAE07D_iwK1w8rprzi_TuhVRbakHhuktNqw/viewform?embedded=true"></iframe>
+        </div>
+    </div>
+
+    <div class="contact-info">
+        <h3>Contact Us</h3>
+        <p><a href="https://wa.me/250785084313" target="_blank" class="whatsapp-link"><strong>Phone:</strong> +250 785 084 313</a> / 
+        <a href="https://wa.me/250794104908" target="_blank" class="whatsapp-link"><strong>Phone:</strong> +250 794 104 908</a></p>
+        <p><strong>Email:</strong> tgautomobilee@gmail.com</p>
+        <p><strong>Address:</strong> KK 15 Rd, Kicukiro, Kigali</p>
+        <a href="testdrive.html" class="btn">Schedule a Test Drive</a>
+    </div>
+
+    <div class="bottom-social-media">
+        <a href="https://www.instagram.com/tg_auto_rwanda/" class="social-item"><img src="ins.jpg" alt="Instagram" loading="lazy"></a>
+        <a href="https://x.com/Triple_Goats" class="social-item"><img src="X.jpg" alt="Twitter" loading="lazy"></a>
+        <a href="https://www.facebook.com/TripleGoats" class="social-item"><img src="facebook.jpg" alt="Facebook" loading="lazy"></a>
+        <a href="https://www.tiktok.com/@tg.auto.rwanda" class="social-item"><img src="tiktok.jpg" alt="TikTok" loading="lazy"></a>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Triple Goats. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.getElementById('menu-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            const dropdown = document.querySelector('.dropdown');
+            const dropdownContent = document.querySelector('.dropdown-content');
+
+            // 菜单切换
+            menuToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                menuToggle.classList.toggle('active');
+            });
+
+            // 下拉菜单切换
+            dropdown.addEventListener('click', (event) => {
+                event.stopPropagation(); // 阻止事件冒泡
+                dropdown.classList.toggle('active');
+            });
+
+            // 全局点击事件，关闭下拉菜单
+            document.addEventListener('click', (event) => {
+                if (!dropdown.contains(event.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+
+            // 点击下拉菜单内容时，不关闭菜单
+            dropdownContent.addEventListener('click', (event) => {
+                event.stopPropagation();
+            });
+        });
+    </script>
+</body>
+</html>

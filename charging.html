@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charging - Triple Goats</title>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" as="style" onload="this.rel='stylesheet'">
+    <link rel="preload" href="companylogo.jpg" as="image">
+    <link rel="preload" href="movie.mp4" as="video">
+    <style>
+        /* 全局样式 */
+        :root {
+            --primary-color: #001f3f;
+            --secondary-color: #ffffff;
+            --accent-color: #0074D9;
+            --dark-color: #000000;
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--primary-color);
+            color: var(--secondary-color);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--accent-color);
+        }
+
+        a, .dropbtn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        img {
+            transition: transform 0.3s;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+        }
+
+        header {
+            background: var(--primary-color);
+            color: var(--secondary-color);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s, filter 0.3s;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 80px;
+            margin-right: 10px;
+            transition: transform 0.3s, filter 0.3s;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-top: 10px;
+        }
+
+        .logo h1 {
+            font-size: 36px;
+            margin: 0 0 3px 0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo .slogan {
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: var(--secondary-color);
+            user-select: none;
+            font-family: 'Roboto', sans-serif;
+            margin-top: 0;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            margin: 4px 0;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+            background-color: var(--secondary-color);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+            background-color: var(--secondary-color);
+        }
+
+        nav.active {
+            display: flex;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-grow: 1;
+        }
+
+        nav a {
+            color: var(--secondary-color);
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+            text-align: center;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.1);
+        }
+
+        nav a.active {
+            color: var(--secondary-color);
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown .dropbtn {
+            color: var(--secondary-color);
+            padding: 8px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            transition: background-color 0.3s, transform 0.3s;
+            text-align: center;
+        }
+
+        .dropdown:hover .dropbtn {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.1);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            width: 200px;
+            text-align: center;
+            border-radius: 5px;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-left: 100px;
+        }
+
+        .dropdown-content.active {
+            display: block;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 10px;
+            color: #333;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .top-social-media {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px 0;
+        }
+
+        .top-social-media img {
+            width: 30px;
+            height: 30px;
+            transition: transform 0.3s, filter 0.3s;
+        }
+
+        .top-social-media img:hover {
+            transform: scale(1.1) rotate(20deg);
+            filter: brightness(1.2);
+        }
+
+        .top-social-media img:active {
+            transform: scale(0.9) rotate(-15deg);
+        }
+
+        .bottom-social-media {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px 0;
+            background: var(--primary-color);
+        }
+
+        .bottom-social-media img {
+            width: 30px;
+            height: 30px;
+            transition: transform 0.3s, filter 0.3s;
+        }
+
+        .bottom-social-media img:hover {
+            transform: scale(1.1) rotate(20deg);
+            filter: brightness(1.2);
+        }
+
+        .bottom-social-media img:active {
+            transform: scale(0.9) rotate(-15deg);
+        }
+
+        .map-container {
+            padding: 20px 0;
+            background-color: #f5f5f5;
+        }
+
+        .contact-info {
+            background: var(--primary-color);
+            color: var(--secondary-color);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .contact-info .btn {
+            display: inline-block;
+            background-color: var(--accent-color); /* 修改颜色 */
+            color: var(--secondary-color);
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .contact-info .btn:hover {
+            background: #0055aa; /* 修改颜色 */
+            color: var(--secondary-color);
+            transform: scale(1.1); /* 添加放大效果 */
+        }
+
+        .contact-info p a {
+            display: inline-block;
+        }
+
+        .contact-info p {
+            font-size: 16px;
+            margin: 10px 0;
+            color: var(--secondary-color); /* 修改颜色为白色 */
+        }
+
+        .whatsapp-link {
+            color: var(--secondary-color); /* 白色 */
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .top-social-media {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+                z-index: 1000;
+            }
+
+            nav {
+                display: none; /* 默认隐藏 */
+                flex-direction: column;
+                position: absolute;
+                top: 92px;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.8);
+                padding: 20px;
+                transition: transform 0.3s;
+                z-index: 999;
+                text-align: center;
+                justify-content: center;
+                align-items: center;
+            }
+
+            nav.active {
+                display: flex;
+            }
+
+            nav a {
+                padding: 5px;
+                text-align: center;
+                width: 100%;
+                margin: 10px 0;
+                transition: none;
+            }
+
+            .dropdown-content {
+                width: 100%;
+                position: static;
+                display: none;
+                box-shadow: none;
+                background: none;
+                text-align: center;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+
+            .dropdown-content a {
+                border-bottom: 1px solid #555;
+                color: var(--secondary-color);
+                text-align: center;
+                margin-left: -25px;
+            }
+
+            .dropdown .dropbtn {
+                text-align: center;
+                width: 100%;
+                margin-left: -13px;
+            }
+
+            .bottom-social-media,
+            .top-social-media {
+                justify-content: center !important;
+            }
+        }
+
+        /* Mobile-specific styles */
+        @media (max-width: 480px) {
+            .logo img {
+                width: 60px;
+            }
+
+            .logo-text h1 {
+                font-size: 24px;
+            }
+
+            .logo-text .slogan {
+                font-size: 8px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .menu-toggle {
+                display: none;
+            }
+            nav {
+                display: flex !important;
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background: var(--primary-color);
+            color: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="home.html" class="logo">
+            <div class="logo-container">
+                <img src="companylogo.jpg" alt="Triple Goats Logo" loading="lazy">
+                <div class="logo-text">
+                    <h1>Triple Goats</h1>
+                    <p class="slogan">GREEN ENERGY GREEN LIFE</p>
+                </div>
+            </div>
+        </a>
+        <nav id="nav-menu">
+            <a href="inventory.html">INVENTORY</a>
+            <a href="charging.html" class="active">CHARGING</a>
+            <a href="services.html">SERVICES</a>
+            <div class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">DISCOVER</a>
+                <div class="dropdown-content">
+                    <a href="testdrive.html">TEST DRIVE</a>
+                    <a href="about.html">ABOUT</a>
+                    <a href="contact.html">CONTACT</a>
+                </div>
+            </div>
+        </nav>
+        <div class="top-social-media">
+            <a href="https://www.instagram.com/tg_auto_rwanda/"><img src="ins.jpg" alt="Instagram" loading="lazy"></a>
+            <a href="https://x.com/Triple_Goats"><img src="X.jpg" alt="Twitter" loading="lazy"></a>
+            <a href="https://www.facebook.com/TripleGoats"><img src="facebook.jpg" alt="Facebook" loading="lazy"></a>
+            <a href="https://www.tiktok.com/@tg.auto.rwanda"><img src="tiktok.jpg" alt="TikTok" loading="lazy"></a>
+        </div>
+        <div class="menu-toggle" id="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1993.7091439229293!2d30.10151!3d-1.987428!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19dcb909c976d39b%3A0x85b1db1ad0e495c5!2z5Y-B576K5rG96L2mIFRnIEVsZWN0cmluIENhciBNYXJrZXQ!5e0!3m2!1szh-CN!2srw!4v1738853579832!5m2!1szh-CN!2srw" width="100%" height="600px" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <div class="contact-info">
+        <h3>Contact Us</h3>
+        <p>
+            <a href="https://wa.me/250785084313" target="_blank" class="whatsapp-link">Phone: +250 785 084 313</a> / 
+            <a href="https://wa.me/250794104908" target="_blank" class="whatsapp-link">+250 794 104 908</a>
+        </p>
+        <p>Email: tgautomobilee@gmail.com</p>
+        <p>Address: KK 15 Rd, Kicukiro, Kigali</p>
+        <a href="testdrive.html" class="btn">Schedule a Test Drive</a>
+    </div>
+
+    <div class="bottom-social-media">
+        <a href="https://www.instagram.com/tg_auto_rwanda/"><img src="ins.jpg" alt="Instagram" loading="lazy"></a>
+        <a href="https://x.com/Triple_Goats"><img src="X.jpg" alt="Twitter" loading="lazy"></a>
+        <a href="https://www.facebook.com/TripleGoats"><img src="facebook.jpg" alt="Facebook" loading="lazy"></a>
+        <a href="https://www.tiktok.com/@tg.auto.rwanda"><img src="tiktok.jpg" alt="TikTok" loading="lazy"></a>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Triple Goats. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dropdown = document.querySelector('.dropdown');
+            const dropdownContent = document.querySelector('.dropdown-content');
+            const menuToggle = document.getElementById('menu-toggle');
+            const navMenu = document.getElementById('nav-menu');
+
+            // 处理 DISCOVER 菜单的点击事件
+            if (dropdown && dropdownContent) {
+                dropdown.addEventListener('click', (e) => {
+                    // 切换 dropdown-content 的 active 类
+                    dropdownContent.classList.toggle('active');
+                    e.stopPropagation(); // 阻止事件冒泡
+                });
+
+                // 点击页面其他地方时关闭 dropdown-content
+                document.addEventListener('click', (e) => {
+                    if (!dropdown.contains(e.target) && dropdownContent.classList.contains('active')) {
+                        dropdownContent.classList.remove('active');
+                    }
+                });
+            }
+
+            // 处理小汉堡菜单的点击事件
+            if (menuToggle && navMenu) {
+                menuToggle.addEventListener('click', () => {
+                    // 切换 nav-menu 和 menu-toggle 的 active 类
+                    navMenu.classList.toggle('active');
+                    menuToggle.classList.toggle('active');
+                });
+
+                // 点击页面其他地方时关闭 nav-menu
+                document.addEventListener('click', (e) => {
+                    if (!menuToggle.contains(e.target) && !navMenu.contains(e.target) && navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                        menuToggle.classList.remove('active');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

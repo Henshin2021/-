@@ -1,335 +1,485 @@
 <!DOCTYPE html>
-<html lang="en" style="scroll-behavior: smooth;">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - Triple Goats Portal</title>
+    <title>Contact Us - Triple Goats</title>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" as="style" onload="this.rel='stylesheet'">
+    <link rel="preload" href="companylogo.jpg" as="image">
     <style>
+        :root {
+            --primary-color: #001f3f;
+            --secondary-color: #ffffff;
+            --accent-color: #0074D9;
+            --dark-color: #000000;
+        }
+
         body {
-            writing-mode: horizontal-tb; /* 确保文字水平显示 */
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background: var(--primary-color);
+            color: var(--secondary-color);
+            line-height: 1.6;
         }
+
+        a { text-decoration: none; color: var(--accent-color); }
+        img { max-width: 100%; height: auto; transition: transform 0.3s; }
+        img:hover { transform: scale(1.05); }
+
         header {
-            background-color: #20603d; /* Dark green */
-            color: white;
-            padding: 10px; /* 增加顶部菜单栏的长度 */
-            text-align: center;
-            position: relative;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果 */
-        }
-        nav {
+            background: var(--primary-color);
+            color: var(--secondary-color);
+            padding: 10px 20px;
             display: flex;
-            justify-content: center;
-            background-color: #fad201; /* Yellow */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果 */
-        }
-        nav a {
-            color: #20603d; /* Dark green */
-            padding: 15px 20px; /* 增加顶部菜单栏的比例 */
-            text-decoration: none;
-            text-align: center;
-            transition: background-color 0.3s, color 0.3s; /* 过渡效果 */
-        }
-        nav a:hover {
-            background-color: #20603d; /* Dark green */
-            color: white;
-            border-radius: 10px; /* 边角圆润化 */
-        }
-        nav a:active {
-            transform: scale(0.95);
-            border-radius: 10px; /* 边角圆润化 */
-        }
-        main {
-            padding: 20px;
-            position: relative;
-        }
-        .section {
-            margin: 20px 0;
-            background-color: #ffffff; /* 白色背景 */
-            padding: 20px 30px; /* 增加内边距 */
-            border-radius: 10px; /* 圆角 */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果 */
-            position: relative;
-            z-index: 1;
-        }
-        .section h3 {
-            margin-top: 0;
-            color: #20603d; /* Dark green */
-        }
-        footer {
-            background-color: #20603d; /* Dark green */
-            color: white;
-            text-align: center;
-            padding: 20px;
-            position: relative;
-            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果 */
-        }
-        .contact-info {
-            display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            margin-top: 10px;
-            font-size: 14px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
-        .contact-info img {
-            margin-right: 5px;
-            width: 16px;
-            height: 16px;
-        }
-        .footer-left {
-            position: absolute;
-            bottom: 5px;
-            left: 5px;
-            font-size: 10px;
-        }
-        .footer-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .footer-content div {
-            margin: 0 10px;
-        }
+
         .logo {
-            position: absolute;
-            top: 30px; /* 往右下偏移 */
-            left: 100px; /* 往右下偏移 */
             display: flex;
             align-items: center;
-            text-decoration: none; /* 取消下划线 */
-            background-color: transparent; /* 背景色改为透明 */
+            transition: transform 0.3s, filter 0.3s;
         }
-        .logo img {
-            width: 40px; /* 调整顶部菜单栏的比例 */
-            height: 40px; /* 调整顶部菜单栏的比例 */
-            margin-right: 10px;
-        }
-        .logo h1 {
-            font-size: 24px; /* 增加字体大小 */
-            color: white;
-        }
-        .hero {
-            background-image: url('hero-image.jpg'); /* 添加背景图片 */
-            background-size: cover;
-            background-position: center;
-            padding: 100px 20px;
-            text-align: center;
-            color: white;
-            box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.3); /* 内部阴影效果 */
-        }
-        .hero h2 {
-            font-size: 48px; /* 增加字体大小 */
-            margin: 0;
-        }
-        .hero p {
-            font-size: 24px; /* 增加字体大小 */
-            margin: 10px 0 0;
-        }
-        .smooth-scroll {
-            scroll-behavior: smooth;
-        }
-        .logo:active h1 {
-            transform: scale(0.95);
-        }
-        .social-icons {
-            position: absolute;
-            top: 50px; /* 向下移动 */
-            right: 60px; /* 向左移动 */
-            display: flex;
-            gap: 10px;
-            background-color: transparent; /* 背景色改为透明 */
-        }
-        .social-icons a img {
-            width: 30px;
-            height: 30px;
-        }
-        .social-icons a:active img {
-            transform: scale(0.95);
-        }
+        .logo img { width: 60px; margin-right: 10px; }
+        .logo h1 { font-size: 36px; margin: 0 0 3px 0; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); }
+        .logo .slogan { font-size: 12px; font-weight: bold; text-transform: uppercase; color: var(--secondary-color); user-select: none; margin-top: 0; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); }
+
         .menu-toggle {
             display: none;
             flex-direction: column;
             cursor: pointer;
-            padding: 10px;
+            padding: 5px;
         }
         .menu-toggle span {
-            height: 3px;
+            display: block;
             width: 25px;
-            background: #20603d;
+            height: 3px;
+            background-color: var(--secondary-color);
             margin: 4px 0;
-            transition: 0.4s;
+            transition: transform 0.3s, background-color 0.3s;
         }
+        .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); background-color: var(--secondary-color); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); background-color: var(--secondary-color); }
+
+        nav {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-grow: 1;
+        }
+        nav a {
+            color: var(--secondary-color);
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        nav a:hover { transform: scale(1.1); background: rgba(255, 255, 255, 0.1); }
+
+        .dropdown {
+            position: relative;
+        }
+        .dropdown .dropbtn {
+            padding: 8px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .dropdown:hover .dropbtn { transform: scale(1.1); background: rgba(255, 255, 255, 0.1); }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            width: 200px;
+            text-align: center;
+            border-radius: 5px;
+            top: 100%;
+            left: 0;
+        }
+        .dropdown:hover .dropdown-content { display: block; }
+        .dropdown-content a {
+            display: block;
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            font-size: 14px;
+            color: black; /* 电脑端字体颜色为黑色 */
+        }
+        .dropdown-content a:last-child { border-bottom: none; }
+        .dropdown-content a:hover { background-color: #ddd; }
+
+        .top-social-media { display: flex; justify-content: center; gap: 15px; padding: 20px 0; }
+        .bottom-social-media { display: flex; justify-content: center; gap: 15px; padding: 20px 0; background: var(--primary-color); }
+        .social-item img {
+            width: 30px; height: 30px; object-fit: cover;
+            transition: transform 0.3s, filter 0.3s;
+        }
+        .social-item img:hover { transform: scale(1.1) rotate(20deg); filter: brightness(1.2); }
+
+        .hero {
+            position: relative;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--secondary-color);
+            text-align: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('contact.png');
+            background-size: cover;
+            background-position: center;
+        }
+        .hero h1 { font-size: 48px; margin-bottom: 20px; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); }
+        .hero p { font-size: 24px; margin-bottom: 30px; }
+
+        .info-cards {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            padding: 40px 20px;
+            background: var(--primary-color);
+        }
+        .card {
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            flex: 1;
+            max-width: 100%;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .card:hover { transform: scale(1.05); }
+
+        .card-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 10px 0;
+        }
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .card-icon img {
+            max-width: 80%;
+            max-height: 80%;
+        }
+        .card-details {
+            flex: 1;
+            text-align: left;
+        }
+        .card-details h3 {
+            font-size: 24px;
+            margin: 0;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        .card-details p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 5px;
+        }
+
+        main {
+            padding: 50px 20px;
+            background: var(--primary-color);
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .form-container,
+        .map-container {
+            flex: 1; /* 确保它们在弹性盒子布局中均匀分布 */
+            background: var(--secondary-color);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        #map {
+            width: 100%;
+            height: 100%; /* 确保地图填充容器 */
+        }
+
+        .embedded-form {
+            width: 100%;
+            height: 600px;
+        }
+
+        .contact-info {
+            text-align: center;
+            margin: 0 auto;
+            max-width: 100%;
+            padding: 20px;
+            background-color: transparent;
+            border-radius: 0;
+            box-shadow: none;
+        }
+        .contact-info h3 { font-size: 24px; margin: 20px 0; color: var(--secondary-color); }
+        .contact-info p { font-size: 16px; margin: 10px 0; color: var(--secondary-color); }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            transition: background-color 0.3s, transform 0.3s;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .btn:hover {
+            background-color: #0055aa;
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .whatsapp-link {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .black-phone {
+            color: #000000;
+            text-decoration: none;
+        }
+
+        .black-number {
+            color: #000000;
+        }
+
+        .white-number {
+            color: #ffffff;
+        }
+
+        /* 响应式设计 */
         @media (max-width: 768px) {
-            .menu-toggle {
-                display: flex;
-            }
+            .menu-toggle { display: flex; }
             nav {
                 flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(0, 0, 0, 0.8);
                 display: none;
+                transition: all 0.3s ease;
+                z-index: 1001;
             }
-            nav.active {
-                display: flex;
-            }
-            nav a {
-                padding: 10px;
-                margin: 5px 0; /* 增加间距 */
-            }
-            .section {
-                padding: 15px;
-            }
-            .hero {
-                padding: 50px 10px;
-            }
-            .hero h2 {
-                font-size: 36px;
-            }
-            .hero p {
-                font-size: 18px;
-            }
-            .social-icons {
-                top: 10px;
-                right: 10px;
-            }
-            .footer-content {
+            nav.active { top: 112px; display: flex; }
+            nav a { padding: 15px; text-align: center; }
+            .dropdown-content { position: static; background-color: rgba(0, 0, 0, 0.5); box-shadow: none; width: 100%; text-align: center; }
+            .dropdown-content a { padding: 15px; border-bottom: 1px solid #ddd; }
+            .dropdown-content a:last-child { border-bottom: none; }
+            .dropdown.active .dropdown-content { display: block; }
+            .dropdown .dropbtn { margin-left: -15px; width: 100%; }
+            .top-social-media { display: none; }
+            .info-cards { flex-direction: column; }
+            .card {  padding: 20px; border-radius: 15px; }
+            main {
                 flex-direction: column;
             }
-            .footer-content div {
-                margin: 5px 0;
+            .form-container, .map-container {
+
+                padding: 20px;
+            }
+            .contact-info {
+                padding: 15px;
+            }
+            .contact-info .contact-details p, .contact-info .btn {
+                font-size: 14px;
+            }
+            .btn {
+                padding: 8px 15px;
+            }
+            .contact-details {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 5px;
+            }
+            .contact-details p {
+                width: 100%;
+                word-break: break-word;
+            }
+            .btn {
+                margin: 10px auto;
+            }
+            .map-container {
+                padding: 10px;
+            }
+
+            /* 移动端字体颜色 */
+            .dropdown-content a {
+                color: white; /* 移动端字体颜色为白色 */
             }
         }
-        .fade-in {
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-        }
-        .fade-in.visible {
-            opacity: 1;
-        }
-        .highlight {
-            background-color: #ffffff; /* 改回白色背景 */
-            transition: background-color 0.3s ease-in-out;
-        }
-        .highlight:hover {
-            background-color: #20603d;
-            color: white;
-        }
-        @keyframes text-fade-in {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-        .dynamic-text {
-            animation: text-fade-in 2s ease-in-out;
-        }
-        .login-button {
-            display: inline-block;
-            padding: 10px 20px;
-            margin-left: 20px;
-            background-color: #20603d; /* Dark green */
-            color: white;
-            text-decoration: none;
-            border-radius: 20px; /* 椭圆形 */
-            transition: background-color 0.3s, color 0.3s; /* 过渡效果 */
-        }
-        .login-button:hover {
-            background-color: #fad201; /* Yellow */
-            color: #20603d; /* Dark green */
-        }
-        .login-button:active {
-            transform: scale(0.95);
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background: var(--primary-color);
+            color: var(--secondary-color);
         }
     </style>
 </head>
 <body>
     <header>
-        <a href="home.html" class="logo" style="left: 100px;">
-            <img src="companylogo.jpg" alt="Company Logo">
-            <h1>Triple Goats</h1>
+        <a href="home.html" class="logo">
+            <img src="companylogo.jpg" alt="Triple Goats Logo" loading="lazy">
+            <div class="logo-text">
+                <h1>Triple Goats</h1>
+                <p class="slogan">GREEN ENERGY GREEN LIFE</p>
+            </div>
         </a>
-        <h1>Contact Us</h1>
-        <div class="social-icons" style="right: 60px;">
-            <a href="https://www.instagram.com/tg_auto_rwanda/" target="_blank">
-                <img src="ins.jpg" alt="Instagram">
-            </a>
-            <a href="https://x.com/Triple_Goats" target="_blank">
-                <img src="X.jpg" alt="Twitter">
-            </a>
-            <a href="https://www.facebook.com/people/TG-AutoRwanda/pfbid024GR5Srhc1oUQRv8XugQWbH9kmRd8iit6hEKAXSb6nfMtwG8qpJCHXCAcSEbh12ntl/?mibextid=LQQJ4d" target="_blank">
-                <img src="Facebook.jpg" alt="Facebook">
-            </a>
-            <a href="https://www.tiktok.com/@tg.auto.rwanda" target="_blank">
-                <img src="TikTok.jpg" alt="TikTok">
-            </a>
-            <a href="login.html" class="login-button" style="margin-left: 20px;">Login</a>
+        <nav id="nav-menu">
+            <a href="inventory.html">INVENTORY</a>
+            <a href="charging.html">CHARGING</a>
+            <a href="services.html">SERVICES</a>
+            <div class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">DISCOVER</a>
+                <div class="dropdown-content">
+                    <a href="testdrive.html">TEST DRIVE</a>
+                    <a href="about.html">ABOUT</a>
+                    <a href="contact.html">CONTACT</a>
+                </div>
+            </div>
+        </nav>
+        <div class="top-social-media">
+            <a href="https://www.instagram.com/tg_auto_rwanda/" class="social-item"><img src="ins.jpg" alt="Instagram" loading="lazy"></a>
+            <a href="https://x.com/Triple_Goats" class="social-item"><img src="X.jpg" alt="Twitter" loading="lazy"></a>
+            <a href="https://www.facebook.com/TripleGoats" class="social-item"><img src="facebook.jpg" alt="Facebook" loading="lazy"></a>
+            <a href="https://www.tiktok.com/@tg.auto.rwanda" class="social-item"><img src="tiktok.jpg" alt="TikTok" loading="lazy"></a>
         </div>
-        <div class="menu-toggle" onclick="toggleMenu()">
+        <div class="menu-toggle" id="menu-toggle">
             <span></span>
             <span></span>
             <span></span>
         </div>
     </header>
-    <nav>
-        <!-- 去掉home功能键 -->
-        <!-- <a href="home.html">Home</a> -->
-        <a href="inventory.html" class="smooth-scroll">Inventory</a>
-        <a href="services.html" class="smooth-scroll">Services</a>
-        <a href="financing.html" class="smooth-scroll">Financing</a>
-        <a href="testimonials.html" class="smooth-scroll">Testimonials</a>
-        <a href="about.html" class="smooth-scroll">About Us</a>
-        <a href="contact.html" class="smooth-scroll">Contact Us</a>
-    </nav>
+
     <div class="hero">
-        <h2 class="dynamic-text">Get in Touch</h2>
-        <p class="dynamic-text">We are here to help you with any questions or concerns</p>
+        <h1>Get in Touch</h1>
+        <p>We are here to help you with any questions or concerns</p>
     </div>
+
+    <div class="info-cards">
+        <div class="card">
+            <div class="card-content">
+                <div class="card-icon">
+                    <img src="phone-icon.png" alt="Phone Icon" class="card-icon">
+                </div>
+                <div class="card-details">
+                    <h3>Contact</h3>
+                    <p><a href="https://wa.me/250785084313" target="_blank">Phone: +250 785 084 313</a> / <a href="https://wa.me/250794104908" target="_blank">+250 794 104 908</a></p>
+                    <p>Email: tgautomobile@gmail.com</p>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-content">
+                <div class="card-icon">
+                    <img src="location-icon.png" alt="Location Icon" class="card-icon">
+                </div>
+                <div class="card-details">
+                    <h3>Location</h3>
+                    <p>Address: KK 15 Rd, Kicukiro, Kigali</p>
+                    <p>City: Kigali</p>
+                    <p>Country: Rwanda</p>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-content">
+                <div class="card-icon">
+                    <img src="time-icon.png" alt="Time Icon" class="card-icon">
+                </div>
+                <div class="card-details">
+                    <h3>Business Hours</h3>
+                    <p>Monday - Friday: 9:00 AM - 6:00 PM UTC+2</p>
+                    <p>Weekend: Closed</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <main>
-        <h2>Get in Touch</h2>
-        <div class="section fade-in highlight">
-            <h3>Contact Information</h3>
-            <p>If you have any questions or need further information, please feel free to contact us.</p>
+        <div class="form-container">
+            <div class="embedded-form">
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdGsQemQKBRHJn9ODs3DbSn4E9PFRtMUwcW2boTwIPgcnfJQA/viewform?embedded=true" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">Your browser does not support iframes.</iframe>
+            </div>
         </div>
-        <div class="section fade-in highlight">
-            <h3>Office Hours</h3>
-            <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
-            <p>Weekend: Closed</p>
-        </div>
-        <div class="section fade-in highlight">
-            <h3>Location</h3>
-            <p>Visit us at KK 15 Rd, Kicukiro, Kigali. We look forward to serving you!</p>
+
+        <div class="map-container">
+            <div id="map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15949.673151412455!2d30.08305617980293!3d-1.9874279969959143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19dcb909c976d39b%3A0x85b1db1ad0e495c5!2z5Y-B576K5rG96L2mIFRnIEVsZWN0cmljIENhciBNYXJrZXQ!5e0!3m2!1szh-CN!2srw!4v1739439963365!5m2!1szh-CN!2srw" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
         </div>
     </main>
-    <footer>
-        <div class="footer-content">
-            <div class="contact-info">
-                <img src="phone-icon.png" alt="Phone">
-                <p>+250 785 084 313 / +250 794 104 908</p>
-            </div>
-            <div class="contact-info">
-                <img src="location-icon.png" alt="Location">
-                <p><a href="https://www.google.com/maps/place/KK+15+Rd,+%E5%8D%A2%E6%97%BA%E8%BE%BE/@-2.0434017,30.0935735,220m/data=!3m1!1e3!4m6!3m5!1s0x19dca6262f5e285b:0x29563196d611ebf4!8m2!3d-2.0432723!4d30.0941671!16s%2Fg%2F12vtxklhg?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" style="text-decoration: none; color: white;">KK 15 Rd, Kicukiro, Kigali</a></p>
-            </div>
+
+    <div class="contact-info">
+        <h3>Contact Us</h3>
+        <div class="contact-details">
+            <p>
+                <a href="https://wa.me/250785084313" target="_blank" class="black-phone white-number">Phone: +250 785 084 313</a>/
+                <a href="https://wa.me/250794104908" target="_blank" class="whatsapp-link white-number">+250 794 104 908</a>
+            </p>
+            <p>Email: tgautomobile@gmail.com</p>
+            <p>Address: KK 15 Rd, Kicukiro, Kigali</p>
         </div>
-        <p class="footer-left">Copyright &copy; 2024 Triple Goats Portal</p>
+        <a href="https://wa.me/250785084313" target="_blank" class="btn">Schedule a Test Drive</a>
+    </div>
+
+    <div class="bottom-social-media">
+        <a href="https://www.instagram.com/tg_auto_rwanda/" class="social-item"><img src="ins.jpg" alt="Instagram" loading="lazy"></a>
+        <a href="https://x.com/Triple_Goats" class="social-item"><img src="X.jpg" alt="Twitter" loading="lazy"></a>
+        <a href="https://www.facebook.com/TripleGoats" class="social-item"><img src="facebook.jpg" alt="Facebook" loading="lazy"></a>
+        <a href="https://www.tiktok.com/@tg.auto.rwanda" class="social-item"><img src="tiktok.jpg" alt="TikTok" loading="lazy"></a>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Triple Goats. All rights reserved.</p>
     </footer>
+
     <script>
-        function toggleMenu() {
-            const nav = document.querySelector('nav');
-            nav.classList.toggle('active');
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
-            const sections = document.querySelectorAll('.fade-in');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
+            const menuToggle = document.getElementById('menu-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            const dropdown = document.querySelector('.dropdown');
 
-            sections.forEach(section => {
-                observer.observe(section);
+            menuToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                menuToggle.classList.toggle('active');
+            });
+
+            dropdown.addEventListener('click', (event) => {
+                event.stopPropagation();
+                dropdown.classList.toggle('active');
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!dropdown.contains(event.target)) {
+                    dropdown.classList.remove('active');
+                }
             });
         });
     </script>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Drive - Triple Goats</title>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" as="style" onload="this.rel='stylesheet'">
+    <link rel="preload" href="companylogo.jpg" as="image">
+    <style>
+        :root {
+            --primary-color: #001f3f;
+            --secondary-color: #ffffff;
+            --accent-color: #0074D9;
+            --dark-color: #000000;
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--primary-color);
+            color: var(--secondary-color);
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: var(--accent-color); }
+        img { max-width: 100%; height: auto; transition: transform 0.3s; }
+        img:hover { transform: scale(1.05); }
+
+        /* WhatsApp Link */
+        .whatsapp-link {
+            color: #ffffff; 
+            text-decoration: none;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--primary-color);
+            color: var(--secondary-color);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s, filter 0.3s;
+        }
+
+        .logo img { width: 80px; margin-right: 10px; }
+        .logo h1 { font-size: 36px; margin: 0 0 3px 0; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); }
+        .logo .slogan { font-size: 12px; font-weight: bold; text-transform: uppercase; color: var(--secondary-color); user-select: none; margin-top: 0; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            margin: 4px 0;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); background-color: var(--secondary-color); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); background-color: var(--secondary-color); }
+
+        nav {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-grow: 1;
+        }
+
+        nav a {
+            color: var(--secondary-color);
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        nav a:hover { transform: scale(1.1); background: rgba(255, 255, 255, 0.1); }
+
+        /* Dropdown Styles */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown .dropbtn {
+            color: var(--secondary-color);
+            padding: 8px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .dropdown:hover .dropbtn { transform: scale(1.1); background: rgba(255, 255, 255, 0.1); }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            width: 200px;
+            text-align: center;
+            border-radius: 5px;
+            top: 100%;
+            left: 0;
+        }
+
+        .dropdown:hover .dropdown-content { display: block; }
+
+        .dropdown-content a {
+            display: block;
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            font-size: 14px;
+            color: #000000; /* Desktop: black */
+            transition: color 0.3s;
+        }
+
+        .dropdown-content a:last-child { border-bottom: none; }
+        .dropdown-content a:hover { background-color: #ddd; }
+
+        /* Social Media Styles */
+        .top-social-media { display: flex; justify-content: center; gap: 15px; padding: 20px 0; }
+        .bottom-social-media {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px 0;
+            background: var(--primary-color);
+        }
+
+        .social-item img {
+            width: 30px;
+            height: 30px;
+            object-fit: cover;
+            transition: transform 0.3s, filter 0.3s;
+            filter: contrast(3) brightness(2); /* 增强对比度 */
+        }
+
+        .social-item img:hover {
+            transform: scale(1.1) rotate(20deg);
+            filter: brightness(0.7);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--secondary-color);
+            text-align: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('testdrive.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero h1 { font-size: 48px; margin-bottom: 20px; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); }
+        .hero p { font-size: 24px; margin-bottom: 30px; }
+
+        /* Test Drive Section */
+        .test-drive-section {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            justify-content: center;
+            padding: 50px 20px;
+            background: var(--primary-color);
+        }
+
+        /* Button Styles (Modified to match services.html) */
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            transition: background-color 0.3s, transform 0.3s;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            background-color: #0055aa;
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Contact Info Section */
+        .contact-info {
+            text-align: center;
+            margin: 0 auto;
+            max-width: 600px;
+            padding: 20px;
+        }
+
+        .contact-info h3 { font-size: 24px; margin: 20px 0; color: var(--secondary-color); }
+        .contact-info p { font-size: 16px; margin: 10px 0; color: var(--secondary-color); }
+        .contact-info .btn { margin: 20px 0; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .menu-toggle { display: flex; }
+            nav {
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(0, 0, 0, 0.8);
+                display: none;
+                transition: all 0.3s ease;
+                z-index: 1001;
+            }
+            nav.active { top: 112px; display: flex; }
+            nav a { padding: 15px; text-align: center; }
+            .dropdown-content { position: static; background-color: rgba(0, 0, 0, 0.5); box-shadow: none; width: 100%; text-align: center; }
+            .dropdown-content a { padding: 15px; border-bottom: 1px solid #ddd; color: var(--secondary-color); }
+            .dropdown-content a:last-child { border-bottom: none; }
+            .dropdown.active .dropdown-content { display: block; }
+            .dropdown .dropbtn { margin-left: -15px; width: 100%; }
+            .top-social-media { display: none; }
+            .test-drive-section iframe {
+                height: 800px;
+            }
+            .contact-info {
+                padding: 10px;
+            }
+            body { overflow-x: hidden; }
+            main { padding: 20px 10px; }
+        }
+
+        /* Set Discover text color */
+        @media (max-width: 768px) {
+            .dropdown-content a {
+                color: var(--secondary-color) !important; /* Mobile: white */
+            }
+        }
+
+        @media (min-width: 768px) {
+            .dropdown-content a {
+                color: #000000; /* Desktop: black */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .test-drive-section iframe {
+                height: 600px;
+            }
+            .contact-info {
+                padding: 10px;
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background: var(--primary-color);
+            color: var(--secondary-color);
+        }
+
+        main {
+            padding: 50px 20px;
+            background: var(--primary-color);
+            text-align: center;
+        }
+
+        main h2 { text-align: left; padding-left: 20px; }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="home.html" class="logo">
+            <img src="companylogo.jpg" alt="Triple Goats Logo" loading="lazy">
+            <div class="logo-text">
+                <h1>Triple Goats</h1>
+                <p class="slogan">GREEN ENERGY GREEN LIFE</p>
+            </div>
+        </a>
+        <nav id="nav-menu">
+            <a href="inventory.html">INVENTORY</a>
+            <a href="charging.html">CHARGING</a>
+            <a href="services.html">SERVICES</a>
+            <div class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">DISCOVER</a>
+                <div class="dropdown-content">
+                    <a href="testdrive.html">TEST DRIVE</a>
+                    <a href="about.html">ABOUT</a>
+                    <a href="contact.html">CONTACT</a>
+                </div>
+            </div>
+        </nav>
+        <div class="top-social-media">
+            <a href="https://www.instagram.com/tg_auto_rwanda/" class="social-item"><img src="ins.jpg" alt="Instagram" loading="lazy"></a>
+            <a href="https://x.com/Triple_Goats" class="social-item"><img src="X.jpg" alt="Twitter" loading="lazy"></a>
+            <a href="https://www.facebook.com/TripleGoats" class="social-item"><img src="facebook.jpg" alt="Facebook" loading="lazy"></a>
+            <a href="https://www.tiktok.com/@tg.auto.rwanda" class="social-item"><img src="tiktok.jpg" alt="TikTok" loading="lazy"></a>
+        </div>
+        <div class="menu-toggle" id="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <div class="hero">
+        <h1>Test Drive</h1>
+        <p>Experience the future of driving</p>
+    </div>
+
+    <main>
+        <h2>Schedule a Test Drive</h2>
+        <div class="test-drive-section">
+            <iframe 
+              src="https://docs.google.com/forms/d/e/1FAIpQLSdfB5dQx8ufCO1aAqP5qQSH0JTJQ6BgNm6ZUTEr1kugWrx1ww/viewform?embedded=true" 
+              width="100%" 
+              height="1000" 
+              frameborder="0" 
+              marginheight="0" 
+              marginwidth="0" 
+              style="max-width: 100%; min-height: 600px; border: none; border-radius: 15px;">
+                正在加载…        
+            </iframe>
+        </div>
+    </main>
+
+    <div class="contact-info">
+        <h3>Contact Us</h3>
+            <a href="https://wa.me/250785084313" target="_blank" class="whatsapp-link">Phone: +250 785 084 313</a>/
+            <a href="https://wa.me/250794104908" target="_blank" class="whatsapp-link"> +250 794 104 908</a>
+        <p>Email: tgautomobilee@gmail.com</p>
+        <p>Address: KK 15 Rd, Kicukiro, Kigali</p>
+        <a href="contact.html" class="btn">Schedule a Test Drive</a>
+    </div>
+
+    <div class="bottom-social-media">
+        <a href="https://www.instagram.com/tg_auto_rwanda/" class="social-item"><img src="ins.jpg" alt="Instagram" loading="lazy"></a>
+        <a href="https://x.com/Triple_Goats" class="social-item"><img src="X.jpg" alt="Twitter" loading="lazy"></a>
+        <a href="https://www.facebook.com/TripleGoats" class="social-item"><img src="facebook.jpg" alt="Facebook" loading="lazy"></a>
+        <a href="https://www.tiktok.com/@tg.auto.rwanda" class="social-item"><img src="tiktok.jpg" alt="TikTok" loading="lazy"></a>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Triple Goats. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.getElementById('menu-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            const dropdown = document.querySelector('.dropdown');
+
+            menuToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                menuToggle.classList.toggle('active');
+            });
+
+            dropdown.addEventListener('click', (event) => {
+                event.stopPropagation();
+                dropdown.classList.toggle('active');
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!dropdown.contains(event.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

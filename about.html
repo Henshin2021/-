@@ -1,340 +1,467 @@
 <!DOCTYPE html>
-<html lang="en" style="scroll-behavior: smooth;">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - Triple Goats Portal</title>
+    <title>About Us - Triple Goats</title>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" as="style" onload="this.rel='stylesheet'">
+    <link rel="preload" href="companylogo.jpg" as="image">
     <style>
+        :root {
+            --primary-color: #001f3f;
+            --secondary-color: #ffffff;
+            --accent-color: #0074D9;
+            --dark-color: #000000;
+        }
+
         body {
-            writing-mode: horizontal-tb; /* 确保文字水平显示 */
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background: var(--primary-color);
+            color: var(--secondary-color);
+            line-height: 1.6;
         }
+
+        a { text-decoration: none; color: var(--accent-color); }
+        img { max-width: 100%; height: auto; transition: transform 0.3s; }
+        img:hover { transform: scale(1.05); }
+
         header {
-            background-color: #20603d; /* Dark green */
-            color: white;
-            padding: 10px; /* 增加顶部菜单栏的长度 */
-            text-align: center;
-            position: relative; 
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果 */
-        }
-        nav {
+            background: var(--primary-color);
+            color: var(--secondary-color);
+            padding: 10px 20px;
             display: flex;
-            justify-content: center;
-            background-color: #fad201; /* Yellow */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果 */
-        }
-        nav a {
-            color: #20603d; /* Dark green */
-            padding: 15px 20px; /* 增加顶部菜单栏的比例 */
-            text-decoration: none;
-            text-align: center;
-            transition: background-color 0.3s, color 0.3s; /* 过渡效果 */
-        }
-        nav a:hover {
-            background-color: #20603d; /* Dark green */
-            color: white;
-            border-radius: 10px; /* 边角圆润化 */
-        }
-        nav a:active {
-            transform: scale(0.95);
-            border-radius: 10px; /* 边角圆润化 */
-        }
-        main {
-            padding: 20px;
-            position: relative;
-        }
-        .section {
-            margin: 20px 0;
-            background-color: #ffffff; /* 白色背景 */
-            padding: 20px 30px; /* 增加内边距 */
-            border-radius: 10px; /* 圆角 */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果 */
-            position: relative;
-            z-index: 1;
-        }
-        .section h3 {
-            margin-top: 0;
-            color: #20603d; /* Dark green */
-        }
-        footer {
-            background-color: #20603d; /* Dark green */
-            color: white;
-            text-align: center;
-            padding: 20px;
-            position: relative;
-            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果 */
-        }
-        .contact-info {
-            display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            margin-top: 10px;
-            font-size: 14px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
-        .contact-info img {
-            margin-right: 5px;
-            width: 16px;
-            height: 16px;
-        }
-        .footer-left {
-            position: absolute;
-            bottom: 5px;
-            left: 5px;
-            font-size: 10px;
-        }
-        .footer-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .footer-content div {
-            margin: 0 10px;
-        }
+
         .logo {
-            position: absolute;
-            top: 30px; /* 往右下偏移 */
-            left: 100px; /* 往右下偏移 */
             display: flex;
             align-items: center;
-            text-decoration: none; /* 取消下划线 */
-            background-color: transparent; /* 背景色改为透明 */
+            transition: transform 0.3s, filter 0.3s;
         }
-        .logo img {
-            width: 40px; /* 调整顶部菜单栏的比例 */
-            height: 40px; /* 调整顶部菜单栏的比例 */
-            margin-right: 10px;
-        }
-        .logo h1 {
-            font-size: 24px; /* 增加字体大小 */
-            color: white;
-        }
-        .logo:active h1 {
-            transform: scale(0.95);
-        }
-        .hero {
-            background-image: url('hero-image.jpg'); /* 添加背景图片 */
-            background-size: cover;
-            background-position: center;
-            padding: 100px 20px;
-            text-align: center;
-            color: white;
-            box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.3); /* 内部阴影效果 */
-        }
-        .hero h2 {
-            font-size: 48px; /* 增加字体大小 */
-            margin: 0;
-        }
-        .hero p {
-            font-size: 24px; /* 增加字体大小 */
-            margin: 10px 0 0;
-        }
-        .smooth-scroll {
-            scroll-behavior: smooth;
-        }
-        .social-icons {
-            position: absolute;
-            top: 50px; /* 向下移动 */
-            right: 60px; /* 向左移动 */
-            display: flex;
-            gap: 10px;
-            background-color: transparent; /* 背景色改为透明 */
-        }
-        .social-icons a img {
-            width: 30px;
-            height: 30px;
-        }
-        .social-icons a:active img {
-            transform: scale(0.95);
-        }
+        .logo img { width: 80px; margin-right: 10px; }
+        .logo h1 { font-size: 36px; margin: 0 0 3px 0; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); }
+        .logo .slogan { font-size: 12px; font-weight: bold; text-transform: uppercase; color: var(--secondary-color); user-select: none; margin-top: 0; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); }
+
         .menu-toggle {
             display: none;
             flex-direction: column;
             cursor: pointer;
-            padding: 10px;
+            padding: 5px;
         }
         .menu-toggle span {
-            height: 3px;
+            display: block;
             width: 25px;
-            background: #20603d;
+            height: 3px;
+            background-color: var(--secondary-color);
             margin: 4px 0;
-            transition: 0.4s;
+            transition: transform 0.3s, background-color 0.3s;
         }
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: flex;
-            }
-            nav {
-                flex-direction: column;
-                display: none;
-            }
-            nav.active {
-                display: flex;
-            }
-            nav a {
-                padding: 10px;
-                margin: 5px 0; /* 增加间距 */
-            }
-            .section {
-                padding: 15px;
-            }
-            .hero {
-                padding: 50px 10px;
-            }
-            .hero h2 {
-                font-size: 36px;
-            }
-            .hero p {
-                font-size: 18px;
-            }
-            .social-icons {
-                top: 10px;
-                right: 10px;
-            }
-            .footer-content {
-                flex-direction: column;
-            }
-            .footer-content div {
-                margin: 5px 0;
-            }
+        .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); background-color: var(--secondary-color); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); background-color: var(--secondary-color); }
+
+        nav {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-grow: 1;
         }
-        .fade-in {
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
+        nav a {
+            color: var(--secondary-color);
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
         }
-        .fade-in.visible {
-            opacity: 1;
+        nav a:hover { transform: scale(1.1); background: rgba(255, 255, 255, 0.1); }
+
+        .dropdown {
+            position: relative;
         }
-        .highlight {
-            background-color: #ffffff; /* 改回白色背景 */
-            transition: background-color 0.3s ease-in-out;
+        .dropdown .dropbtn {
+            padding: 8px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            transition: background-color 0.3s, transform 0.3s;
         }
-        .highlight:hover {
-            background-color: #20603d;
-            color: white;
+        .dropdown:hover .dropbtn { transform: scale(1.1); background: rgba(255, 255, 255, 0.1); }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            width: 200px;
+            text-align: center;
+            border-radius: 5px;
+            top: 100%;
+            left: 0;
         }
-        @keyframes text-fade-in {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
+        .dropdown:hover .dropdown-content { display: block; }
+        .dropdown-content a {
+            display: block;
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            font-size: 14px;
+            color: #000000;
+            transition: color 0.3s;
         }
-        .dynamic-text {
-            animation: text-fade-in 2s ease-in-out;
+        .dropdown-content a:last-child { border-bottom: none; }
+        .dropdown-content a:hover { background-color: #ddd; }
+
+        .top-social-media { display: flex; justify-content: center; gap: 15px; padding: 20px 0; }
+        .bottom-social-media { display: flex; justify-content: center; gap: 15px; padding: 20px 0; background: var(--primary-color); }
+        .social-item img {
+            width: 30px; height: 30px; object-fit: cover;
+            transition: transform 0.3s, filter 0.3s;
         }
-        .login-button {
+        .social-item img:hover { transform: scale(1.1) rotate(20deg); filter: brightness(1.2); }
+
+        .hero {
+            position: relative;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--secondary-color);
+            text-align: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('about.png');
+            background-size: cover;
+            background-position: center;
+        }
+        .hero h1 { font-size: 48px; margin-bottom: 20px; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); }
+        .hero p { font-size: 24px; margin-bottom: 30px; }
+
+        .info-cards {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            padding: 40px 20px;
+            background: var(--primary-color);
+        }
+        .card {
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            flex: 1;
+            max-width: 350px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .card:hover { transform: scale(1.05); }
+
+        .card-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 10px 0;
+        }
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 10px 20px;
-            background-color: #20603d;
-            color: white;
-            border-radius: 20px;
-            text-decoration: none;
+            color: var(--primary-color);
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .card-icon img {
+            max-width: 80%;
+            max-height: 80%;
+        }
+        .card-details {
+            flex: 1;
+            text-align: left;
+        }
+        .card-details h3 {
+            font-size: 24px;
+            margin: 0;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        .card-details p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 5px;
+        }
+
+        .about-section {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            justify-content: center;
+            padding: 50px 20px;
+            background: var(--primary-color);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
             transition: background-color 0.3s, transform 0.3s;
-            margin-left: 20px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
-        .login-button:hover {
-            background-color: #fad201;
-            color: #20603d;
+        .btn:hover {
+            background-color: #0055aa;
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
         }
-        .login-button:active {
-            transform: scale(0.95);
+
+        .contact-info {
+            text-align: center;
+            margin: 0 auto;
+            max-width: 600px;
+            padding: 20px;
+            background-color: transparent;
+            border-radius: 0;
+            box-shadow: none;
         }
+        .contact-info h3 { font-size: 24px; margin: 20px 0; color: var(--secondary-color); }
+        .contact-info p { font-size: 16px; margin: 10px 0; color: var(--secondary-color); }
+        .contact-info .btn { margin: 20px 0; background-color: var(--accent-color); box-shadow: none; }
+
+        .whatsapp-link {
+            color: #ffffff; 
+            text-decoration: none;
+        }
+
+        .black-phone {
+            color: #000000; 
+            text-decoration: none;
+        }
+
+        .black-number {
+            color: #000000; 
+        }
+
+        .white-number {
+            color: #ffffff; 
+        }
+
+        /* Enhanced Section Styles */
+        .about-section .section {
+            background-color: #f5f5f5; /* Light background */
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        .about-section .section-content {
+            background-color: #ffffff; /* White background for content */
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05); /* Inner shadow */
+        }
+
+        .about-section .section h3 {
+            color: #2c3e50; /* Dark blue header */
+            font-size: 32px ;
+            margin: 0 0 1rem;
+            border-bottom: 2px solid #0074d9; /* Accent color border */
+            padding-bottom: 0.75rem;
+        }
+
+        .about-section .section p {
+            color: #333333; /* Dark grey text */
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: flex; }
+            nav {
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(0, 0, 0, 0.8);
+                display: none;
+                transition: all 0.3s ease;
+                z-index: 1001;
+            }
+            nav.active { top: 112px; display: flex; }
+            nav a { padding: 15px; text-align: center; }
+            .dropdown-content { position: static; background-color: rgba(0, 0, 0, 0.5); box-shadow: none; width: 100%; text-align: center; }
+            .dropdown-content a { padding: 15px; border-bottom: 1px solid #ddd; color: var(--secondary-color); }
+            .dropdown.active .dropdown-content { display: block; }
+            .dropdown .dropbtn {
+                margin-left: -15px;
+                width: 100%;
+                color: var(--secondary-color); 
+            }
+            .top-social-media { display: none; }
+            .info-cards { flex-direction: column; }
+            .card { max-width: 100%; padding: 20px; border-radius: 15px; }
+            .about-section { padding: 20px 10px; }
+            .about-section .section {
+                margin: 1rem 0;
+                padding: 1rem;
+            }
+            body { overflow-x: hidden; }
+            main { padding: 20px 10px; }
+        }
+
+        @media (min-width: 768px) {
+            .dropdown-content a {
+                color: #000000 !important; 
+            }
+        }
+
+        @media (max-width: 480px) {
+            .about-section { padding: 10px; }
+            .hero h1 { font-size: 36px; }
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background: var(--primary-color);
+            color: var(--secondary-color);
+        }
+
+        main {
+            padding: 50px 20px;
+            background: var(--primary-color);
+            text-align: center;
+        }
+        main h2 { text-align: left; padding-left: 20px; }
     </style>
 </head>
 <body>
     <header>
-        <a href="home.html" class="logo" style="left: 100px;">
-            <img src="companylogo.jpg" alt="Company Logo">
-            <h1>Triple Goats</h1>
+        <a href="home.html" class="logo">
+            <img src="companylogo.jpg" alt="Triple Goats Logo" loading="lazy">
+            <div class="logo-text">
+                <h1>Triple Goats</h1>
+                <p class="slogan">GREEN ENERGY GREEN LIFE</p>
+            </div>
         </a>
-        <h1>About Us</h1>
-        <div class="social-icons" style="right: 60px;">
-            <a href="https://www.instagram.com/tg_auto_rwanda/" target="_blank">
-                <img src="ins.jpg" alt="Instagram">
-            </a>
-            <a href="https://x.com/Triple_Goats" target="_blank">
-                <img src="X.jpg" alt="Twitter">
-            </a>
-            <a href="https://www.facebook.com/people/TG-AutoRwanda/pfbid024GR5Srhc1oUQRv8XugQWbH9kmRd8iit6hEKAXSb6nfMtwG8qpJCHXCAcSEbh12ntl/?mibextid=LQQJ4d" target="_blank">
-                <img src="Facebook.jpg" alt="Facebook">
-            </a>
-            <a href="https://www.tiktok.com/@tg.auto.rwanda" target="_blank">
-                <img src="TikTok.jpg" alt="TikTok">
-            </a>
-            <a href="login.html" class="login-button" style="margin-left: 20px;">Login</a>
+        <nav id="nav-menu">
+            <a href="inventory.html">INVENTORY</a>
+            <a href="charging.html">CHARGING</a>
+            <a href="services.html">SERVICES</a>
+            <div class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">DISCOVER</a>
+                <div class="dropdown-content">
+                    <a href="testdrive.html">TEST DRIVE</a>
+                    <a href="about.html">ABOUT</a>
+                    <a href="contact.html">CONTACT</a>
+                </div>
+            </div>
+        </nav>
+        <div class="top-social-media">
+            <a href="https://www.instagram.com/tg_auto_rwanda/" class="social-item"><img src="ins.jpg" alt="Instagram" loading="lazy"></a>
+            <a href="https://x.com/Triple_Goats" class="social-item"><img src="X.jpg" alt="Twitter" loading="lazy"></a>
+            <a href="https://www.facebook.com/TripleGoats" class="social-item"><img src="facebook.jpg" alt="Facebook" loading="lazy"></a>
+            <a href="https://www.tiktok.com/@tg.auto.rwanda" class="social-item"><img src="tiktok.jpg" alt="TikTok" loading="lazy"></a>
         </div>
-        <div class="menu-toggle" onclick="toggleMenu()">
+        <div class="menu-toggle" id="menu-toggle">
             <span></span>
             <span></span>
             <span></span>
         </div>
     </header>
-    <nav>
-        <!-- 去掉home功能键 -->
-        <!-- <a href="home.html">Home</a> -->
-        <a href="inventory.html" class="smooth-scroll">Inventory</a>
-        <a href="services.html" class="smooth-scroll">Services</a>
-        <a href="financing.html" class="smooth-scroll">Financing</a>
-        <a href="testimonials.html" class="smooth-scroll">Testimonials</a>
-        <a href="about.html" class="smooth-scroll">About Us</a>
-        <a href="contact.html" class="smooth-scroll">Contact Us</a>
-    </nav>
+
     <div class="hero">
-        <h2 class="dynamic-text">About Triple Goats</h2>
-        <p class="dynamic-text">Learn more about our company and values</p>
+        <h1>About T&G AUTOMOBILE</h1>
+        <p>Learn more about our company and values</p>
     </div>
+
+
+
     <main>
-        <h2>About Triple Goats</h2>
-        <div class="section fade-in highlight">
-            <h3>Our Mission</h3>
-            <p>Triple Goats is a leading car dealership offering a wide range of new and used cars. Our mission is to provide excellent customer service and help you find the perfect car.</p>
-        </div>
-        <div class="section fade-in highlight">
-            <h3>Our Values</h3>
-            <p>We believe in integrity, transparency, and putting our customers first. Our team is dedicated to making your car buying experience as smooth and enjoyable as possible.</p>
-        </div>
-        <div class="section fade-in highlight">
-            <h3>Our History</h3>
-            <p>Founded in 2024, Triple Goats has grown to become one of the most trusted car dealerships in the region.</p>
-        </div>
-        <div class="section fade-in highlight">
-            <h3>Community Involvement</h3>
-            <p>We are committed to giving back to the community through various initiatives and partnerships.</p>
+        <h2>About T&G AUTOMOBILE</h2>
+        <div class="about-section">
+            <div class="section">
+                <div class="section-content">
+                    <h3>Our Mission</h3>
+                    <p>San Yang (Rwanda) Automobile Sales Co., Ltd. is committed to providing high-quality and diverse automobile products as well as excellent after-sales services to the Rwandan market. Our mission is to offer customers a wide range of vehicle choices, from sedans and SUVs to pickup trucks and commercial vehicles, ensuring that we meet the needs of individual consumers, businesses, and government departments. We are dedicated to building long-term relationships with our customers by providing reliable products and exceptional service.</p>
+                </div>
+            </div>
+            <div class="section">
+                <div class="section-content">
+                    <h3>Our Values</h3>
+                    <p>At San Yang (Rwanda) Automobile Sales Co., Ltd., we uphold the values of integrity, professionalism, and customer-centricity. We believe in conducting our business with honesty and transparency, ensuring that our customers receive accurate information and fair treatment. Our team of professionals is committed to providing expert advice and support, helping customers make informed decisions about their vehicle purchases. We prioritize customer satisfaction and strive to exceed expectations in every interaction.</p>
+                </div>
+            </div>
+            <div class="section">
+                <div class="section-content">
+                    <h3>Our History</h3>
+                    <p>Founded in [specific year of establishment], San Yang (Rwanda) Automobile Sales Co., Ltd. has grown to become a trusted name in the Rwandan automobile industry. Starting as a small venture, we have expanded our operations and now serve a wide range of customers across the country. Our journey has been marked by a commitment to quality, innovation, and customer satisfaction, and we continue to strive for excellence in all aspects of our business.</p>
+                </div>
+            </div>
+            <div class="section">
+                <div class="section-content">
+                    <h3>Community Involvement</h3>
+                    <p>We are actively involved in supporting the local community through various initiatives. We collaborate with local organizations to promote road safety awareness and education, aiming to create a safer driving environment for everyone. Additionally, we participate in corporate social responsibility programs that focus on environmental sustainability and social development, reflecting our dedication to making a positive impact beyond our business operations.</p>
+                </div>
+            </div>
         </div>
     </main>
-    <footer>
-        <div class="footer-content">
-            <div class="contact-info">
-                <img src="phone-icon.png" alt="Phone">
-                <p>+250 785 084 313 / +250 794 104 908</p>
-            </div>
-            <div class="contact-info">
-                <img src="location-icon.png" alt="Location">
-                <p><a href="https://www.google.com/maps/place/KK+15+Rd,+%E5%8D%A2%E6%97%BA%E8%BE%BE/@-2.0434017,30.0935735,220m/data=!3m1!1e3!4m6!3m5!1s0x19dca6262f5e285b:0x29563196d611ebf4!8m2!3d-2.0432723!4d30.0941671!16s%2Fg%2F12vtxklhg?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" style="text-decoration: none; color: white;">KK 15 Rd, Kicukiro, Kigali</a></p>
-            </div>
+
+    <div class="contact-info">
+        <h3>Contact Us</h3>
+        <div class="contact-details">
+            <p>
+                <a href="https://wa.me/250785084313" target="_blank" class="black-phone white-number"><strong>Phone:</strong> +250 785 084 313</a>/
+                <a href="https://wa.me/250794104908" target="_blank" class="whatsapp-link white-number"><strong>Phone:</strong> +250 794 104 908</a>
+            </p>
+            <p><strong>Email:</strong> tgautomobile@gmail.com</p>
+            <p><strong>Address:</strong> KK 15 Rd, Kicukiro, Kigali</p>
         </div>
-        <p class="footer-left">Copyright &copy; 2025 Triple Goats Portal</p>
+        <a href="https://wa.me/250785084313" target="_blank" class="btn">Schedule a Test Drive</a>
+    </div>
+
+    <div class="bottom-social-media">
+        <a href="https://www.instagram.com/tg_auto_rwanda/" class="social-item"><img src="ins.jpg" alt="Instagram" loading="lazy"></a>
+        <a href="https://x.com/Triple_Goats" class="social-item"><img src="X.jpg" alt="Twitter" loading="lazy"></a>
+        <a href="https://www.facebook.com/TripleGoats" class="social-item"><img src="facebook.jpg" alt="Facebook" loading="lazy"></a>
+        <a href="https://www.tiktok.com/@tg.auto.rwanda" class="social-item"><img src="tiktok.jpg" alt="TikTok" loading="lazy"></a>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Triple Goats. All rights reserved.</p>
     </footer>
+
     <script>
-        function toggleMenu() {
-            const nav = document.querySelector('nav');
-            nav.classList.toggle('active');
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
-            const sections = document.querySelectorAll('.fade-in');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
+            const menuToggle = document.getElementById('menu-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            const dropdown = document.querySelector('.dropdown');
 
-            sections.forEach(section => {
-                observer.observe(section);
+            menuToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                menuToggle.classList.toggle('active');
+            });
+
+            dropdown.addEventListener('click', (event) => {
+                event.stopPropagation();
+                dropdown.classList.toggle('active');
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!dropdown.contains(event.target)) {
+                    dropdown.classList.remove('active');
+                }
             });
         });
     </script>

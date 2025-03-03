@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BYD YUAN PLUS - Triple Goats</title>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" as="style" onload="this.rel='stylesheet'"/>
+    <link rel="preload" href="companylogo.jpg" as="image"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <style>
+        /* 主题变量 */
+        :root {
+            --primary-color: #001f3f;
+            --secondary-color: #ffffff;
+            --accent-color: #0074D9;
+            --accent-color-dark: #00346e;
+            --card-bg-color: #FFFFFF;
+            --card-hover-color: #001f3f;
+            --text-color: #001f3f;
+        }
+
+        /* 基本样式 */
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--primary-color);
+            color: var(--secondary-color);
+            line-height: 1.6;
+        }
+
+        /* 链接样式 */
+        a {
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        /* 图片样式 */
+        img {
+            max-width: 100%;
+            height: auto;
+            transition: transform 0.3s;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+        }
+
+        /* 头部导航栏样式 */
+        header {
+            background: var(--primary-color);
+            color: var(--secondary-color);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* logo样式 */
+        .logo {
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s, filter 0.3s;
+        }
+
+        .logo img {
+            width: 80px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 36px;
+            margin: 0 0 3px 0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            color: var(--accent-color);
+        }
+
+        .logo .slogan {
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: var(--secondary-color);
+            user-select: none;
+            font-family: 'Roboto', sans-serif;
+            margin-top: 0;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 菜单按钮样式 */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            margin: 4px 0;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+            background-color: var(--secondary-color);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+            background-color: var(--secondary-color);
+        }
+
+        /* 导航栏样式 */
+        nav {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-grow: 1;
+        }
+
+        /* 导航按钮样式 */
+        nav a {
+            color: var(--secondary-color); /* 白色 */
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        nav a:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* 下拉菜单样式 */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown .dropbtn {
+            color: var(--secondary-color); /* 白色 */
+            padding: 8px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .dropdown:hover .dropbtn {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            width: 200px;
+            text-align: center;
+            border-radius: 5px;
+            top: 100%;
+            left: 0;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        /* 社交媒体图标样式 */
+        .top-social-media {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px 0;
+        }
+
+        .bottom-social-media {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px 0;
+            background: var(--primary-color);
+        }
+
+        .social-item img {
+            width: 30px;
+            height: 30px;
+            object-fit: cover;
+            transition: transform 0.3s, filter 0.3s;
+        }
+
+        .social-item img:hover {
+            transform: scale(1.1) rotate(20deg);
+            filter: brightness(1.2);
+        }
+
+        .social-item img:active {
+            transform: scale(0.9) rotate(-15deg);
+        }
+
+        /* 响应式布局 */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav {
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(0, 0, 0, 0.8);
+                display: none;
+                transition: all 0.3s ease;
+                z-index: 1001;
+            }
+
+            nav.active {
+                top: 112px;
+                display: flex;
+            }
+
+            nav a {
+                padding: 15px;
+                text-align: center;
+                color: var(--secondary-color); /* 白色 */
+            }
+
+            .dropdown-content {
+                position: static;
+                background-color: rgba(0, 0, 0, 0.5);
+                box-shadow: none;
+                width: 100%;
+                text-align: center;
+            }
+
+            .dropdown-content a {
+                padding: 15px;
+                border-bottom: 1px solid #ddd;
+                color: var(--secondary-color); /* 白色 */
+            }
+
+            .dropdown-content a:last-child {
+                border-bottom: none;
+            }
+
+            .dropdown-content {
+                display: none;
+            }
+
+            .dropdown.active .dropdown-content {
+                display: block;
+            }
+
+            .dropdown .dropbtn {
+                margin-left: -15px;
+                width: 100%;
+                color: var(--secondary-color); /* 白色 */
+            }
+
+            .top-social-media {
+                display: none;
+            }
+
+            body {
+                overflow-x: hidden;
+            }
+            
+            main {
+                padding: 20px 10px;
+            }
+
+            .vehicle-info {
+                grid-template-columns: 1fr; /* 设置为单列布局 */
+            }
+
+            .vehicle-images,
+            .vehicle-specs {
+                margin-top: 20px; /* 可选：添加间距 */
+            }
+
+            /* 缩小移动端车辆图片大小 */
+            .vehicle-images .carousel-container {
+                height: 300px; /* 调整为适合移动端的高度 */
+            }
+
+            .vehicle-images .carousel-slide img {
+                transform: scale(0.8); /* 缩小图片尺寸 */
+            }
+        }
+
+        /* 页面底部样式 */
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background: var(--primary-color);
+            color: var(--secondary-color);
+        }
+
+        /* 主要内容区域样式 */
+        main {
+            padding: 50px 20px;
+            background: var(--primary-color);
+            text-align: center;
+        }
+
+        /* 联系我们信息样式 */
+        .contact-info {
+            text-align: center;
+            margin: 20px auto;
+            max-width: 600px;
+            padding: 20px;
+        }
+
+        .contact-info h3 {
+            font-size: 24px;
+            margin: 20px 0;
+            color: var(--secondary-color);
+        }
+
+        .contact-info p {
+            font-size: 16px;
+            margin: 10px 0;
+            color: var(--secondary-color);
+        }
+
+        .contact-info .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: background-color 0.3s;
+            margin-top: 15px;
+        }
+
+        .contact-info .btn:hover {
+            background: #0055aa;
+            color: var(--secondary-color);
+        }
+
+        /* WhatsApp链接样式 */
+        .whatsapp-link {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* 按钮样式 */
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            transition: background-color 0.3s, transform 0.3s;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: #0055aa;
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 无车辆提示样式 */
+        .no-vehicle-alert {
+            display: none;
+            padding: 20px;
+            background-color: #ffcccc;
+            border-radius: 8px;
+            margin: 20px auto;
+            width: 80%;
+            text-align: center;
+            font-weight: bold;
+            color: #660000;
+        }
+
+        /* .vehicle-info 样式 */
+        main {
+            padding: 60px 30px;
+            text-align: center;
+            transition: padding 0.3s;
+        }
+
+        .vehicle-info {
+            background-color: #ffffff; /* 背景颜色改为白色 */
+            color: #000000; /* 文字颜色改为黑色 */
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 默认双列布局 */
+            gap: 20px;
+            transition: transform 0.3s;
+        }
+
+        .vehicle-info h2,
+        .vehicle-info table,
+        .vehicle-info table th,
+        .vehicle-info table td {
+            color: #000000; /* 确保所有文字为黑色 */
+        }
+
+        /* 确保在移动端图片和文本堆叠 */
+        @media (max-width: 768px) {
+            .vehicle-info {
+                grid-template-columns: 1fr; /* 设置为单列布局 */
+            }
+        }
+
+        /* 轮播容器样式 */
+        .carousel-container {
+            display: flex;
+            overflow: hidden;
+            position: relative;
+            max-width: 100%;
+            height: 500px; /* 减小照片尺寸 */
+            margin: 20px 0;
+        }
+
+        .carousel-slide {
+            display: flex;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .carousel-slide img {
+            min-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .prev-arrow {
+            left: 20px;
+        }
+
+        .next-arrow {
+            right: 20px;
+        }
+
+        .vehicle-specs table {
+            width: 100%;
+            max-width: 500px;
+            margin: 20px 0;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .vehicle-specs th,
+        .vehicle-specs td {
+            padding: 14px;
+            text-align: left;
+            transition: background-color 0.3s;
+        }
+
+        .vehicle-specs th {
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        .color-options {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .color-circle {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 2px solid #333333; /* 添加灰色描边 */
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .color-circle:hover {
+            transform: scale(1.2);
+            border-color: var(--accent-color);
+        }
+
+        /* 车辆描述样式 */
+        .vehicle-description {
+            font-size: 16px;
+            margin: 20px 0;
+            color: #333333; /* 深灰色字体 */
+            text-align: left; /* 靠左对齐 */
+        }
+
+        /* 车辆标题样式 */
+        .vehicle-specs h2 {
+            text-align: left; /* 靠左对齐 */
+        }
+
+        /* 测试驱动按钮样式 */
+        .schedule-test-drive-btn {
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* 内容品牌名称蓝色样式 */
+        .content-brand-name {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        /* 物流车辆图片上有遮罩层样式 */
+        .vehicle-image-mask {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .vehicle-image-mask::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.2));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .vehicle-image-mask:hover::before {
+            opacity: 1;
+        }
+
+        /* 表格整体样式 */
+        .vehicle-specs table {
+            width: 100%;
+            max-width: 500px;
+            margin: 20px 0;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        /* 表格标题和单元格的黑色描边 */
+        .vehicle-specs table th,
+        .vehicle-specs table td {
+            padding: 14px;
+            text-align: left;
+            transition: background-color 0.3s;
+            border: 1px solid gray; /* 内部边框 */
+        }
+
+        /* 表格标题的样式 */
+        .vehicle-specs table thead th {
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        /* 表格内容部分的黑色描边 */
+        .vehicle-specs table tbody th,
+        .vehicle-specs table tbody td {
+            border: 1px solid black; /* 内部黑色描边 */
+        }
+
+        /* 设置 <tbody> 的黑色描边 */
+        .vehicle-specs table tbody {
+            border: 1px solid black; /* `<tbody>` 外部描边 */
+            margin: 10px 0;
+            box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 表格内的行样式 */
+        .vehicle-specs tbody tr {
+            transition: background-color 0.3s;
+        }
+
+        .vehicle-specs tbody tr:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        /* 电脑端设置主功能键文字为白色，子菜单文字为黑色 */
+        @media (min-width: 768px) {
+            nav a,
+            .dropdown .dropbtn {
+                color: var(--secondary-color); /* 白色 */
+            }
+            .dropdown-content a {
+                color: var(--text-color); /* 黑色 */
+            }
+        }
+
+        /* 移动端设置主功能键文字为白色，子菜单文字为白色 */
+        @media (max-width: 768px) {
+            nav a,
+            .dropdown .dropbtn,
+            .dropdown-content a {
+                color: var(--secondary-color); /* 白色 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="home.html" class="logo">
+            <img src="companylogo.jpg" alt="Triple Goats Logo" loading="lazy"/>
+            <div class="logo-text">
+                <h1>Triple Goats</h1>
+                <p class="slogan">GREEN ENERGY GREEN LIFE</p>
+            </div>
+        </a>
+        <nav id="nav-menu">
+            <a href="inventory.html" class="active">INVENTORY</a>
+            <a href="charging.html">CHARGING</a>
+            <a href="services.html">SERVICES</a>
+            <div class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">DISCOVER</a>
+                <div class="dropdown-content">
+                    <a href="testdrive.html">TEST DRIVE</a>
+                    <a href="about.html">ABOUT</a>
+                    <a href="contact.html">CONTACT</a>
+                </div>
+            </div>
+        </nav>
+        <div class="top-social-media">
+            <a href="https://www.instagram.com/tg_auto_rwanda/" class="social-item"><img src="ins.jpg" alt="Instagram" loading="lazy"/></a>
+            <a href="https://x.com/Triple_Goats" class="social-item"><img src="X.jpg" alt="Twitter" loading="lazy"/></a>
+            <a href="https://www.facebook.com/TripleGoats" class="social-item"><img src="facebook.jpg" alt="Facebook" loading="lazy"/></a>
+            <a href="https://www.tiktok.com/@tg.auto.rwanda" class="social-item"><img src="tiktok.jpg" alt="TikTok" loading="lazy"/></a>
+        </div>
+        <div class="menu-toggle" id="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <main>
+        <div class="vehicle-info">
+            <div class="vehicle-images">
+                <div class="carousel-container">
+                    <button class="carousel-arrow prev-arrow" onclick="prevSlide()">&#10094;</button>
+                    <button class="carousel-arrow next-arrow" onclick="nextSlide()">&#10095;</button>
+                    <div class="carousel-slide" id="carouselSlide">
+                        <!-- 替换后的图片路径 -->
+                        <img src="yuanplus\yuanplus.jpg" alt="Vehicle Image 1" loading="lazy"/>
+                        <img src="yuanplus\1740416742004.jpg" alt="Vehicle Image 2" loading="lazy"/>
+                        <img src="yuanplus\1740416758692.jpg" alt="Vehicle Image 3" loading="lazy"/>
+                        <img src="yuanplus\1740416673142.jpg" alt="Vehicle Image 4" loading="lazy"/>
+                        <img src="yuanplus\1740416686603.jpg" alt="Vehicle Image 5" loading="lazy"/>
+                        <img src="yuanplus\1740416699026.jpg" alt="Vehicle Image 6" loading="lazy"/>
+                        <img src="yuanplus\1740416730026.jpg" alt="Vehicle Image 7" loading="lazy"/>
+                    </div>
+                </div>
+            </div>
+            <div class="vehicle-specs">
+                <h2>2024 BYD YUAN PLUS</h2>
+                <div class="vehicle-description">
+                    <p>The BYD YUAN PLUS is a compact SUV designed for urban driving. It offers a range of 510 km, seating for up to 5 passengers, and a basic configuration. With its efficient electric motor and modern design, the YUAN PLUS is perfect for city commuters looking for a reliable and eco-friendly vehicle.</p>
+                </div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>YEAR</th>
+                            <td>2024</td>
+                        </tr>
+                        <tr>
+                            <th>MAKE</th>
+                            <td>BYD</td>
+                        </tr>
+                        <tr>
+                            <th>MODEL</th>
+                            <td>YUAN PLUS</td>
+                        </tr>
+                        <tr>
+                            <th>RANGE</th>
+                            <td>510 KM</td>
+                        </tr>
+                        <tr>
+                            <th>SEATS</th>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <th>CONFIGURATION</th>
+                            <td>Basic</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="color-options">
+                    <span class="color-circle" style="background-color: #808080;"></span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="contact-info">
+        <h3>Contact Us</h3>
+        <p>
+            <a href="https://wa.me/250785084313" target="_blank" class="whatsapp-link">Phone: +250 785 084 313</a> /
+            <a href="https://wa.me/250794104908" target="_blank" class="whatsapp-link">+250 794 104 908</a>
+        </p>
+        <p>Email: tgautomobilee@gmail.com</p>
+        <p>Address: KK 15 Rd, Kicukiro, Kigali</p>
+        <div class="schedule-test-drive-btn">
+            <a href="testdrive.html" class="btn">Schedule a Test Drive</a>
+        </div>
+    </div>
+
+    <div class="bottom-social-media">
+        <a href="https://www.instagram.com/tg_auto_rwanda/" class="social-item"><img src="ins.jpg" alt="Instagram" loading="lazy"/></a>
+        <a href="https://x.com/Triple_Goats" class="social-item"><img src="X.jpg" alt="Twitter" loading="lazy"/></a>
+        <a href="https://www.facebook.com/TripleGoats" class="social-item"><img src="facebook.jpg" alt="Facebook" loading="lazy"/></a>
+        <a href="https://www.tiktok.com/@tg.auto.rwanda" class="social-item"><img src="tiktok.jpg" alt="TikTok" loading="lazy"/></a>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Triple Goats. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript code to handle menu toggle (if needed)
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.getElementById('menu-toggle');
+            const navMenu = document.getElementById('nav-menu');
+
+            menuToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                menuToggle.classList.toggle('active');
+            });
+
+            // Close the mobile menu when clicking outside
+            window.addEventListener('click', event => {
+                if (!menuToggle.contains(event.target) && !navMenu.contains(event.target)) {
+                    navMenu.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                }
+            });
+        });
+
+        // Slider functionality
+        let slideIndex = 0;
+
+        function showSlides() {
+            const slides = document.querySelectorAll('#carouselSlide img');
+            if (slideIndex >= slides.length) slideIndex = 0;
+            if (slideIndex < 0) slideIndex = slides.length - 1;
+            const translateX = -slideIndex * 100;
+            document.getElementById('carouselSlide').style.transform = `translateX(${translateX}%)`;
+        }
+
+        function nextSlide() {
+            slideIndex++;
+            showSlides();
+        }
+
+        function prevSlide() {
+            slideIndex--;
+            showSlides();
+        }
+
+        showSlides();
+    </script>
+</body>
+</html>

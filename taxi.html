@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>出租车服务</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        #map {
+            width: 100%;
+            height: 500px;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f8f8f8;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>出租车服务</h1>
+        <div class="form-group">
+            <input type="text" id="start" placeholder="请输入起点地址" required>
+        </div>
+        <div class="form-group">
+            <input type="text" id="end" placeholder="请输入终点地址" required>
+        </div>
+        <div class="form-group">
+            <button onclick="calculateRoute()">规划路线</button>
+        </div>
+        <div id="result"></div>
+        <div id="map"></div>
+        <a href="testdrive.html" class="btn">Schedule a Test Drive</a>
+    </div>
+
+    <!-- 引入高德地图API -->
+    <script src="https://webapi.amap.com/maps?v=1.4.15&key=e23e0feab19b5d9c3543ab59274a4bb8"></script>
+    <script>
+        // 初始化地图
+        let map = new AMap.Map('map', {
+            center: [116.397428, 39.90923], // 默认中心点（北京）
+            zoom: 12 // 默认缩放级别
+        });
+
+        // 获取输入框和结果显示区域
+        let startInput = document.getElementById('start');
+        let endInput = document.getElementById('end');
+        let resultDiv = document.getElementById('result');
+
+        // 路线规划和费用估算
+        function calculateRoute() {
+            let start = startInput.value.trim();
+            let end = endInput.value.trim();
+
+            if (!start || !end) {
+                alert('请输入起点和终点地址！');
+                return;
+            }
+
+            resultDiv.innerHTML = '<p>正在规划路线，请稍候...</p>';
+
+            // 加载驾车规划插件
+            AMap.plugin(['AMap.Driving', 'AMap.Taxi'], function() {
+                // 驾车规划
+                let driving = new AMap.Driving({
+                    map: map,
+                    panel: "result", // 将结果显示在 #result 容器中
+                    policy: AMap.DrivingPolicy.LEAST_TIME // 最短时间策略
+                });
+
+                // 费用估算
+                let taxi = new AMap.Taxi({
+                    map: map,
+                    panel: "result"
+                });
+
+                // 调用驾车规划
+                driving.search(start, end, function(status, result) {
+                    if (status === 'complete') {
+                        console.log('路线规划成功');
+                        // 调用费用估算
+                        taxi.search(start, end, function(status, result) {
+                            if (status === 'complete') {
+                                let fare = result.fares[0].fare; // 获取打车费用
+                                resultDiv.innerHTML = `
+                                    <p>路线规划成功！</p>
+                                    <p>预计行驶距离：${result.route[0].distance} 米</p>
+                                    <p>预计行驶时间：${result.route[0].duration} 秒</p>
+                                    <p>预计费用：${fare} 元</p>
+                                `;
+                            } else {
+                                resultDiv.innerHTML = '<p>费用估算失败，请重试！</p>';
+                            }
+                        });
+                    } else {
+                        resultDiv.innerHTML = '<p>路线规划失败，请重试！</p>';
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+</html>
