@@ -63,6 +63,12 @@
             margin-right: 10px;
         }
 
+        .logo .logo-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
         .logo h1 {
             font-size: 36px;
             margin: 0 0 3px 0;
@@ -130,7 +136,6 @@
             background: rgba(255, 255, 255, 0.1);
         }
 
-        /* Dropdown Menu */
         .dropdown {
             position: relative;
         }
@@ -181,7 +186,6 @@
             background-color: #ddd;
         }
 
-        /* Social Media */
         .top-social-media {
             display: flex;
             justify-content: center;
@@ -213,7 +217,6 @@
             transform: scale(0.9) rotate(-15deg);
         }
 
-        /* Hero Section */
         .hero {
             position: relative;
             height: 80vh;
@@ -239,26 +242,25 @@
             pointer-events: none;
         }
 
-        /* vehicle-list 样式 */
         .vehicle-list {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(0, 31, 63, 0.8); /* 半透明深蓝色背景 */
+            background: rgba(0, 31, 63, 0.8);
             padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 20px;
-            flex-wrap: nowrap; /* 保持在一行 */
+            flex-wrap: nowrap;
             z-index: 1000;
-            border-radius: 10px; /* 圆角边框 */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 添加阴影 */
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .vehicle-list a {
-            color: var(--secondary-color); /* 文字颜色为白色 */
+            color: var(--secondary-color);
             font-size: 18px;
             font-weight: bold;
             padding: 10px 20px;
@@ -270,12 +272,11 @@
 
         .vehicle-list a:hover {
             text-decoration: underline;
-            background: rgba(255, 255, 255, 0.2); /* 悬停时加深背景 */
+            background: rgba(255, 255, 255, 0.2);
             transform: scale(1.1);
             margin: 0 5px;
         }
 
-        /* Vehicle Section */
         .vehicle-section {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -346,21 +347,19 @@
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
         }
 
-        /* 新增：地图部分的样式 */
         .map-container {
             padding: 30px 0;
             background: var(--primary-color);
             text-align: center;
-            margin: 40px 0; /* 可选：上下留出空间 */
+            margin: 40px 0;
         }
 
-        /* 电脑端、移动端均居中对齐 */
         .map-header {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin-bottom: 20px; /* 可选：留出地图与标题的空间 */
+            margin-bottom: 20px;
         }
 
         .map-header h2 {
@@ -373,13 +372,12 @@
             color: var(--secondary-color);
         }
 
-        /* 新增：Contact Us 样式 */
         .contact-info {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 30px 20px; /* 调整间距 */
+            padding: 30px 20px;
             background: var(--primary-color);
             text-align: center;
         }
@@ -398,9 +396,7 @@
             margin-top: 20px;
         }
 
-        /* 响应式设计 */
         @media (max-width: 768px) {
-            /* 移动端调整 */
             .menu-toggle {
                 display: flex;
             }
@@ -508,7 +504,6 @@
                 height: 350px;
             }
 
-            /* 移动端隐藏 vehicle-list */
             .vehicle-list {
                 display: none;
             }
@@ -521,7 +516,6 @@
             color: var(--secondary-color);
         }
 
-        /* Smooth Scrolling */
         html {
             scroll-behavior: smooth;
         }
@@ -568,13 +562,13 @@
             Your browser does not support the video tag.
         </video>
         <nav class="vehicle-list">
-            <a href="sedan.html">Sedan</a>
-            <a href="suv.html">SUV</a>
-            <a href="pickup.html">Pickup</a>
-            <a href="trucks.html">Truck</a>
-            <a href="refrigerated.html">Refrigerated</a>
-            <a href="buses.html">Bus</a>
-            <a href="vans.html">Van</a>
+            <a href="inventory.html?type=sedan">Sedan</a>
+            <a href="inventory.html?type=suv">SUV</a>
+            <a href="inventory.html?type=pickup">Pickup</a>
+            <a href="inventory.html?type=truck">Truck</a>
+            <a href="inventory.html?type=refrigerated">Refrigerated</a>
+            <a href="inventory.html?type=bus">Bus</a>
+            <a href="inventory.html?type=van">Van</a>
         </nav>
     </div>
 
@@ -655,19 +649,16 @@
     </footer>
 
     <script>
-        // Toggle mobile menu
         document.getElementById('menu-toggle').addEventListener('click', () => {
             document.getElementById('nav-menu').classList.toggle('active');
             document.getElementById('menu-toggle').classList.toggle('active');
         });
 
-        // Toggle dropdown menu
         document.querySelector('.dropdown').addEventListener('click', (event) => {
             event.stopPropagation();
             document.querySelector('.dropdown').classList.toggle('active');
         });
 
-        // Close dropdown when clicking outside
         document.addEventListener('click', (event) => {
             const dropdown = document.querySelector('.dropdown');
             if (!dropdown.contains(event.target)) {
