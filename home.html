@@ -1,21 +1,26 @@
+<!-- 标准引用方式 -->
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Triple Goats</title>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" as="style" onload="this.rel='stylesheet'">
     <link rel="preload" href="companylogo.jpg" as="image">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <style>
         /* 全局样式 */
         :root {
-            --primary-color: #001f3f; /* 深蓝色 */
-            --secondary-color: #ffffff; /* 白色 */
-            --accent-color: #0074D9; /* 蓝色 */
-            --dark-color: #000000; /* 黑色 */
-            --card-bg-color: #002a54; /* 更新车辆卡片背景颜色：深蓝色 */
-            --card-hover-color: #001f3f; /* 更新悬停背景颜色 */
-            --text-color: #ffffff; /* 文字颜色：白色 */
+            --primary-color: #001f3f; 
+            --secondary-color: #ffffff; 
+            --accent-color: #0074D9; 
+            --dark-color: #000000; 
+            --card-bg-color: #002a54; 
+            --card-hover-color: #001f3f; 
+            --text-color: #ffffff; 
         }
 
         body {
@@ -73,7 +78,7 @@
             font-size: 36px;
             margin: 0 0 3px 0;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-            color: var(--accent-color); /* 修改为蓝色 */
+            color: var(--accent-color);
         }
 
         .logo .slogan {
@@ -125,7 +130,7 @@
         }
 
         nav a {
-            color: var(--secondary-color);
+            color: var(--text-color);
             padding: 8px 15px;
             border-radius: 5px;
             transition: background-color 0.3s, transform 0.3s;
@@ -141,7 +146,7 @@
         }
 
         .dropdown .dropbtn {
-            color: var(--secondary-color);
+            color: var(--text-color);
             padding: 8px 15px;
             border-radius: 5px;
             display: inline-block;
@@ -224,7 +229,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: var(--secondary-color);
+            color: var (--secondary-color);
             text-align: center;
             background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('hero-bg.jpg');
             background-size: cover;
@@ -507,6 +512,14 @@
             .vehicle-list {
                 display: none;
             }
+
+            nav a {
+                color: var(--secondary-color);
+            }
+
+            .dropdown-content a {
+                color: var(--secondary-color);
+            }
         }
 
         footer {
@@ -518,6 +531,15 @@
 
         html {
             scroll-behavior: smooth;
+        }
+
+        /* 电脑端字体颜色 */
+        @media (min-width: 768px) {
+            nav a[href="testdrive.html"],
+            nav a[href="about.html"],
+            nav a[href="contact.html"] {
+                color: var(--dark-color);
+            }
         }
     </style>
 </head>
@@ -578,43 +600,57 @@
             <img src="sedan.jpg" alt="Sedan">
             <h3>Sedan</h3>
             <p>Stylish and fuel-efficient sedans for everyday use.</p>
-            <a href="sedan.html" class="btn">View Details</a>
+            <a href="inventory.html?type=sedan" class="btn">
+                <i class="fas fa-eye" style="margin-right:5px;"></i>View
+            </a>
         </div>
         <div class="vehicle-card">
             <img src="suv.jpg" alt="SUV">
             <h3>SUV</h3>
             <p>Explore our wide range of high-performance SUVs.</p>
-            <a href="suv.html" class="btn">View Details</a>
+            <a href="inventory.html?type=suv" class="btn">
+                <i class="fas fa-eye" style="margin-right:5px;"></i>View
+            </a>
         </div>
         <div class="vehicle-card">
             <img src="pickup.jpg" alt="Pickup">
             <h3>Pickup</h3>
             <p>Powerful and reliable pickups to meet all your needs.</p>
-            <a href="pickup.html" class="btn">View Details</a>
+            <a href="inventory.html?type=pickup" class="btn">
+                <i class="fas fa-eye" style="margin-right:5px;"></i>View
+            </a>
         </div>
         <div class="vehicle-card">
             <img src="truck.jpg" alt="Truck">
             <h3>Truck</h3>
             <p>High-capacity trucks suitable for long-distance transportation.</p>
-            <a href="trucks.html" class="btn">View Details</a>
+            <a href="inventory.html?type=truck" class="btn">
+                <i class="fas fa-eye" style="margin-right:5px;"></i>View
+            </a>
         </div>
         <div class="vehicle-card">
             <img src="refrigerated.jpg" alt="Refrigerated">
             <h3>Refrigerated</h3>
             <p>Refrigerated vehicles for transporting perishable goods.</p>
-            <a href="refrigerated.html" class="btn">View Details</a>
+            <a href="inventory.html?type=refrigerated" class="btn">
+                <i class="fas fa-eye" style="margin-right:5px;"></i>View
+            </a>
         </div>
         <div class="vehicle-card">
             <img src="bus.jpg" alt="Bus">
             <h3>Bus</h3>
             <p>Comfortable and spacious buses for group transportation.</p>
-            <a href="buses.html" class="btn">View Details</a>
+            <a href="inventory.html?type=bus" class="btn">
+                <i class="fas fa-eye" style="margin-right:5px;"></i>View
+            </a>
         </div>
         <div class="vehicle-card">
             <img src="van.jpg" alt="Van">
             <h3>Van</h3>
             <p>Efficient and economical vans to support your business.</p>
-            <a href="vans.html" class="btn">View Details</a>
+            <a href="inventory.html?type=van" class="btn">
+                <i class="fas fa-eye" style="margin-right:5px;"></i>View
+            </a>
         </div>
     </section>
 

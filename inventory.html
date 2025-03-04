@@ -1,12 +1,17 @@
+<!-- 标准引用方式 -->
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
 <!DOCTYPE html>
-<!-- saved from url=(0036)inventory.html -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory - Triple Goats</title>
     <link rel="stylesheet" href="css2" as="style" onload="this.rel='stylesheet';">
     <link rel="preload" href="companylogo.jpg" as="image">
     <link rel="stylesheet" href="all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <style>
         /* 主题变量 */
         :root {
@@ -27,6 +32,7 @@
             background: var(--primary-color);
             color: var(--secondary-color);
             line-height: 1.6;
+            font-weight: bold;
         }
 
         /* 链接样式 */
@@ -129,7 +135,7 @@
 
         /* 导航按钮样式 */
         nav a {
-            color: var(--secondary-color); /* 白色 */
+            color: var(--secondary-color); 
             padding: 8px 15px;
             border-radius: 5px;
             transition: background-color 0.3s, transform 0.3s;
@@ -181,7 +187,7 @@
             text-align: center;
             border-bottom: 1px solid #ddd;
             font-size: 14px;
-            color: var(--text-color); /* 黑色 */
+            color: var(--text-color); 
         }
 
         .dropdown-content a:last-child {
@@ -268,6 +274,7 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(45deg, rgba(255, 255, 255, 0.15), rgba(0, 0, 0, 0.05));
+            border-radius: 10px;
             z-index: -1;
             transition: opacity 0.3s;
         }
@@ -285,6 +292,10 @@
             transition: transform 0.3s;
         }
 
+        .vehicle-card:hover img {
+            transform: scale(1.05);
+        }
+
         /* 车辆卡片标题样式 */
         .vehicle-card h3 {
             font-size: 18px;
@@ -292,8 +303,6 @@
             margin-bottom: 8px;
             text-transform: uppercase;
             font-weight: bold;
-            word-wrap: break-word;
-            text-align: left;
         }
 
         /* 车辆卡片信息样式 */
@@ -304,7 +313,6 @@
             text-align: center;
             line-height: 1.2;
             padding: 0 15px;
-            word-wrap: break-word;
         }
 
         /* 按钮样式 */
@@ -410,7 +418,7 @@
             .dropdown-content a {
                 padding: 15px;
                 border-bottom: 1px solid #ddd;
-                color: var(--secondary-color); /* 白色 */
+                color: var(--secondary-color); 
             }
 
             .dropdown-content a:last-child {
@@ -590,7 +598,7 @@
             padding: 12px 22px;
             font-size: 12px;
             font-weight: bold;
-            color: var(--secondary-color);
+            color: var (--secondary-color);
             background-color: rgba(255, 255, 255, 0.1);
             border: 2px solid var(--accent-color);
             border-radius: 10px;
@@ -711,7 +719,7 @@
         }
 
         .icon-range {
-            color: var(--accent-color);
+            color: var (--accent-color);
             font-size: 14px;
             margin-right: 5px;
         }
@@ -1133,7 +1141,7 @@
                                 <i class="fas fa-cog icon-configuration"></i>
                                 Configuration:
                             </span>
-                            <span class="info-value">Premium</span>
+                            <span class="info-value">Basic</span>
                         </div>
                     </div>
                     <div class="price-info-container">
@@ -1245,7 +1253,7 @@
                             </div>
                         </div>
                         <div class="color-circle-container">
-                            <span class="color-circle" style="background-color: #FFFFFF;"></span>
+                            <span class="color-circle" style="background-color: #808080;"></span>
                         </div>
                     </div>
                     <button class="btn" data-link="toyota-bz3.html">
@@ -1332,7 +1340,7 @@
                                 <i class="fas fa-cog icon-configuration"></i>
                                 Configuration:
                             </span>
-                            <span class="info-value">Premium</span>
+                            <span class="info-value">Basic</span>
                         </div>
                     </div>
                     <div class="price-info-container">
@@ -1581,8 +1589,8 @@
 
         // 点击选项后选择车辆类型
         function selectOption(option) {
-            const selectedType = option.textContent.trim();
-            document.querySelector('.custom-select .select-selected').textContent = selectedType;
+            const selectedType = option.textContent.trim().toLowerCase();
+            document.querySelector('.custom-select .select-selected').textContent = selectedType === 'all types' ? 'All Types' : selectedType;
             document.getElementById('type-options').style.display = 'none';
         }
 
@@ -1693,8 +1701,16 @@
                 });
             });
 
-            // 初始加载时应用筛选和排序
-            applyFilters();
+            // 检查URL参数以设置初始类型筛选
+            const urlParams = new URLSearchParams(window.location.search);
+            const typeParam = urlParams.get('type');
+            if (typeParam) {
+                currentType = typeParam.toLowerCase();
+                typeFilter.textContent = typeParam.charAt(0).toUpperCase() + typeParam.slice(1);
+                applyFilters();
+            } else {
+                applyFilters();
+            }
         });
 
         // 处理汉堡菜单点击
@@ -1710,32 +1726,32 @@
 	// <![CDATA[  <-- For SVG support
 	if ('WebSocket' in window) {
 		(function () {
-			function refreshCSS() {
-				var sheets = [].slice.call(document.getElementsByTagName("link"));
-				var head = document.getElementsByTagName("head")[0];
-				for (var i = 0; i < sheets.length; ++i) {
-					var elem = sheets[i];
-					var parent = elem.parentElement || head;
-					parent.removeChild(elem);
-					var rel = elem.rel;
-					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-					}
-					parent.appendChild(elem);
-				}
-			}
-			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function (msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-				console.log('Live reload enabled.');
-				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-			}
+            function refreshCSS() {
+                var sheets = [].slice.call(document.getElementsByTagName("link"));
+                var head = document.getElementsByTagName("head")[0];
+                for (var i = 0; i < sheets.length; ++i) {
+                    var elem = sheets[i];
+                    var parent = elem.parentElement || head;
+                    parent.removeChild(elem);
+                    var rel = elem.rel;
+                    if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+                        var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+                        elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+                    }
+                    parent.appendChild(elem);
+                }
+            }
+            var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+            var address = protocol + window.location.host + window.location.pathname + '/ws';
+            var socket = new WebSocket(address);
+            socket.onmessage = function (msg) {
+                if (msg.data == 'reload') window.location.reload();
+                else if (msg.data == 'refreshcss') refreshCSS();
+            };
+            if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+                console.log('Live reload enabled.');
+                sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+            }
 		})();
 	}
 	else {
